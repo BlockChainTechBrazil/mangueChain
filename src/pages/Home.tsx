@@ -1,45 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
 import AOS from "aos";
 import "aos/dist/aos.css";
-import About from "../components/About";
-import HowToDonate from "../components/HowToDonate";
-import Impact from "../components/Impact";
-import Partners from "../components/Partners";
 import Header from "../components/Header";
-import ImpactCard from "../components/ImpactCard";
+import VideoBackground from "../components/VideoBackground";
 import { DonationProvider } from "../contexts/DonationContext";
 import { useDonation } from "../hooks/useDonation";
 import * as ethers from "ethers";
-import VideoBackground from "../components/VideoBackground";
 
 // const bankContract = '0xE0CeDEF67A7b10355236bD6087DC1ADF494b4817';
 const proxyContract = '0x0595d3f5EE5cFb8Ba4FC7Bad31846cd264BFA0CC';
 // const clientContract = '0x22A0f7ce33e44702Badd7B31DfDF940535b79dB2';
 
 
-const HomeContent: React.FC = () => {
-  const { t } = useTranslation();
-  const { address, fetchSaldo, fetchWalletBalance } = useDonation();
 
-  // Estado para mensagens reais
+const HomeContent: React.FC = () => {
+  const { address, fetchSaldo, fetchWalletBalance } = useDonation();
   const [donationMessages, setDonationMessages] = useState<{ name: string, value: string, msg: string }[]>([]);
   const [loadingMessages, setLoadingMessages] = useState(false);
 
   async function fetchMessages() {
     setLoadingMessages(true);
     try {
-      // ethers já está disponível no contexto global do projeto
       const eth = (window as typeof window & { ethereum?: unknown }).ethereum;
-      if (!eth) throw new Error("Wallet not found");
+      if (!eth) throw new Error("Wallet não encontrada");
       const provider = new ethers.BrowserProvider(eth as ethers.Eip1193Provider);
-      // Buscar o endereço do cofre atual
       const proxyABI = [
         { "inputs": [], "name": "getCurrentVault", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }
       ];
       const proxy = new ethers.Contract(proxyContract, proxyABI, provider);
       const vaultAddr = await proxy.getCurrentVault();
-      // ABI mínima para evento Deposit
       const bankABI = [
         {
           "anonymous": false,
@@ -53,19 +42,16 @@ const HomeContent: React.FC = () => {
         }
       ];
       const bank = new ethers.Contract(vaultAddr, bankABI, provider);
-      // Busca todos os eventos Deposit do cofre
       const filter = bank.filters.Deposit();
       const events = await bank.queryFilter(filter, 0, "latest");
       const formatted = events.map(ev => {
-        // ev.args is a Result object, so we need to extract by index or by key if available
-        // For ethers v6, args is an array-like object with named properties
         const args = (ev as ethers.EventLog).args as unknown as { from: string; amount: bigint; message: string };
         return {
           name: args && args.from ? args.from : "Anônimo",
           value: ethers.formatEther(args.amount) + " ETH",
           msg: args.message
         };
-      }).reverse(); // mais recentes primeiro
+      }).reverse();
       setDonationMessages(formatted);
     } catch {
       setDonationMessages([]);
@@ -87,24 +73,58 @@ const HomeContent: React.FC = () => {
       <Header />
       <VideoBackground />
 
+      {/* 1. O que é o mangue */}
       <section className="absolute left-1/2 top-64 -translate-x-1/2 flex flex-col items-center justify-center w-full flex-1 gap-12 max-w-screen-2xl mx-auto" data-aos="fade-up">
-        <div className="flex-1 flex flex-col items-center justify-center text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
-            {t('title')}
-          </h1>
-          <p className="text-xl md:text-2xl text-white mb-8 w-full max-w-screen-md font-medium">
-            {t('subtitle')}
-            <br />
-            <span className="text-red-300 font-bold">{t('transparency')}</span>, <span className="text-red-500 font-bold">{t('joy')}</span> and <span className="text-yellow-400 font-bold">{t('real_impact')}</span>.
-          </p>
+        <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
+          <div className="flex flex-col items-center justify-center w-full">
+            <img src="/Crab.png" alt="Mangue" className="w-32 h-32 mb-4 drop-shadow-xl" style={{ borderRadius: '50%', border: '4px solid #ef4444', background: '#fff' }} />
+            <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
+              O que é o mangue?
+            </h1>
+            <p className="text-2xl md:text-3xl text-white mb-8 w-full max-w-3xl font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
+              O mangue é um ecossistema costeiro fundamental para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
+              Ele filtra a água, abriga espécies e protege contra enchentes.<br />
+              <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span>
+            </p>
+          </div>
         </div>
       </section>
 
-      <Impact />
+      {/* 2. Por que preservar o mangue é bom */}
+      <section className="w-full flex flex-col items-center py-12 bg-black/60 max-w-screen-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Por que preservar o mangue é importante?</h2>
+        <ul className="text-lg text-white font-medium flex flex-col gap-3 max-w-2xl mx-auto">
+          <li>• Protege as cidades de enchentes e erosão.</li>
+          <li>• Garante alimento e renda para milhares de famílias.</li>
+          <li>• Mantém a biodiversidade e o equilíbrio ambiental.</li>
+          <li>• Ajuda a combater as mudanças climáticas.</li>
+        </ul>
+      </section>
 
-      {/* Mensagens reais de esperança */}
+      {/* 3. Recife e Olinda têm as melhores organizações de catadores */}
+      <section className="w-full flex flex-col items-center py-12 bg-black/70 max-w-screen-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Recife e Olinda: referência em organizações de catadores</h2>
+        <p className="text-lg text-white font-medium max-w-2xl mx-auto mb-4">
+          As cidades de Recife e Olinda são reconhecidas nacionalmente pela força e organização dos catadores de materiais recicláveis. Essas organizações são protagonistas na defesa do mangue e na regeneração do bioma.
+        </p>
+        <div className="flex flex-wrap gap-6 justify-center items-center mt-4 w-full">
+          <div className="bg-white/90 border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Associação Mangue Vivo</div>
+          <div className="bg-white/90 border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Rede Catadores Recife</div>
+          <div className="bg-white/90 border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Olinda Sustentável</div>
+        </div>
+      </section>
+
+      {/* 4. Mobilização social e empoderamento dos catadores */}
+      <section className="w-full flex flex-col items-center py-12 bg-black/60 max-w-screen-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Mobilização social: catadores regenerando o mangue</h2>
+        <p className="text-lg text-white font-medium max-w-2xl mx-auto">
+          A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue. Apoiar essas iniciativas é investir em um futuro sustentável para todos.
+        </p>
+      </section>
+
+      {/* 5. Prova social */}
       <section className="w-full flex flex-col items-center py-12 bg-black/50 max-w-screen-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">{t('messages_title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Prova social: mensagens reais de esperança</h2>
         {loadingMessages ? (
           <div className="text-lg text-red-300 font-semibold">Carregando mensagens...</div>
         ) : donationMessages.length === 0 ? (
@@ -121,59 +141,9 @@ const HomeContent: React.FC = () => {
         )}
       </section>
 
-      {/* Impact cards */}
-      <section className="w-full flex flex-col items-center py-16 bg-transparent max-w-screen-2xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-12 text-center drop-shadow-lg">{t('impact_title')}</h2>
-        <div className="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl">
-          <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60" className="w-16 h-16"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-            title={t('impact_crabs')}
-            value="+120"
-            description={t('impact_crabs_desc')}
-            colorFrom="#ef4444"
-            colorTo="#f97316"
-          />
-          <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /></svg>}
-            title={t('impact_donations')}
-            value="R$ 500k+"
-            description={t('impact_donations_desc')}
-            colorFrom="#f97316"
-            colorTo="#eab308"
-          />
-          <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /></svg>}
-            title={t('impact_projects')}
-            value="15+"
-            description={t('impact_projects_desc')}
-            colorFrom="#eab308"
-            colorTo="#ef4444"
-          />
-        </div>
-      </section>
-
-      <main className="flex-1 w-full mx-auto text-white max-w-[1400px] z-10">
-        <section id="about" className="py-16 flex justify-center">
-          <div className="w-full max-w-4xl bg-black/70 rounded-3xl shadow-xl p-12 md:p-20 border-2 border-red-300">
-            <About />
-          </div>
-        </section>
-        <section id="how-to-donate" className="py-16 flex justify-center">
-          <div className="w-full max-w-4xl bg-black/60 rounded-3xl shadow-xl p-12 md:p-20 border-2 border-red-300">
-            <HowToDonate />
-          </div>
-        </section>
-        <section id="partners" className="py-16 flex justify-center">
-          <div className="w-full max-w-4xl bg-black/70 rounded-3xl shadow-xl p-12 md:p-20 border-2 border-red-300">
-            <Partners />
-          </div>
-        </section>
-      </main>
-
       <footer className="bg-black/80 text-center py-6 text-white text-base mt-8 border-t border-red-300 font-semibold shadow-inner z-10">
-        © {new Date().getFullYear()} <span className="text-red-500 font-bold">MangueChain</span>. {t('footer')}
+        © {new Date().getFullYear()} <span className="text-red-500 font-bold">MangueChain</span>. Juntos pela regeneração do mangue!
       </footer>
-      {/* Navegação suave */}
       <style>{`
         html {
           scroll-behavior: smooth;
