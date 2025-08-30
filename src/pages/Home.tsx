@@ -93,7 +93,10 @@ const HomeContent: React.FC = () => {
                 transform-style: preserve-3d;
               }
             `}</style>
-            <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
+            <h1
+              className="text-2xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg"
+              style={{ textShadow: '4px 4px 32px #fff, 0 0 16px #fff, 0 0 24px #fff' }}
+            >
               CrabCoin
             </h1>
           </div>
@@ -101,23 +104,32 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* 1. O que é o mangue */}
-      <section className=" flex items-center justify-center w-full flex-1 gap-12 mt-24 mx-auto" data-aos="fade-up">
+      <section id="oque-e-o-mangue" className=" flex items-center justify-center w-full flex-1 gap-12 mt-24 mx-auto scroll-mt-32" data-aos="fade-up">
         <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
-          <div className="flex flex-col items-center justify-center w-full">           
+          <div className="flex flex-col items-center justify-center w-full">
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
               O que é o mangue?
             </h1>
-            <p className="text-2xl md:text-3xl text-white mb-8 w-full max-w-3xl font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
+            <p className="text-2xl md:text-3xl text-white mb-8 w-1/2 font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
               O mangue é um ecossistema costeiro fundamental para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
               Ele filtra a água, abriga espécies e protege contra enchentes.<br />
-              <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span>
+              <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span><br /><br />
+              <span className="text-white font-semibold">Curiosidades sobre o mangue:</span><br />
+              <ul className="text-xl text-white font-medium list-disc list-inside mt-2 mb-2">
+                <li>O mangue é um dos ecossistemas mais produtivos do planeta, servindo de berçário para peixes, caranguejos e camarões.</li>
+                <li>Suas raízes filtram poluentes e ajudam a manter a qualidade da água.</li>
+                <li>O solo do mangue armazena até 5x mais carbono que florestas tropicais, combatendo o aquecimento global.</li>
+                <li>É fonte de sustento para milhares de famílias de pescadores e catadores.</li>
+                <li>O manguezal é símbolo de resistência e adaptação, sobrevivendo em áreas de água doce e salgada.</li>
+              </ul>
+              <span className="text-orange-200">Preservar o mangue é preservar a vida, a cultura e o futuro das cidades costeiras!</span>
             </p>
           </div>
         </div>
       </section>
 
       {/* 2. Por que preservar o mangue é importante? */}
-      <section className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl" data-aos="fade-right">
+      <section id="por-que-preservar" className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl scroll-mt-32" data-aos="fade-right">
         <div className="grid grid-cols-2 md:grid-cols-2 gap-8 items-center">
           <div className="flex flex-col items-start justify-center text-left w-full ml-64">
             <h2 className="text-5xl font-extrabold text-[#ef4444] mb-6 drop-shadow-lg">Por que preservar o mangue é importante?</h2>
@@ -135,7 +147,7 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* 3. Recife e Olinda têm as melhores organizações de catadores */}
-      <section className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl" data-aos="fade-left">
+      <section id="organizacoes" className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl scroll-mt-32" data-aos="fade-left">
         <div className="grid grid-cols-2 md:grid-cols-2 gap-8 items-center">
           <div className="flex flex-col items-center justify-center w-full">
             <img src="/img/caranguejo.png" alt="Catadores" className="w-160 h-160 object-contain" />
@@ -146,16 +158,25 @@ const HomeContent: React.FC = () => {
               As cidades de Recife e Olinda são reconhecidas nacionalmente pela força e organização dos catadores de materiais recicláveis. Essas organizações são protagonistas na defesa do mangue e na regeneração do bioma.
             </p>
             <div className="flex flex-wrap gap-6 items-center w-full">
-              <div className="bg-white border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Associação Mangue Vivo</div>
-              <div className="bg-white border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Rede Catadores Recife</div>
-              <div className="bg-white border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Olinda Sustentável</div>
+              <div className="bg-white border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
+                <img src="/img/redeReciclaMais.png" alt="Mangue Vivo Logo" className="w-20 h-20 object-contain mb-2" />
+                Rede Recicla+ Pernambuco
+              </div>
+              <div className="bg-white border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
+                <img src="/img/redeReciclaMais.png" alt="Rede Catadores Recife Logo" className="w-20 h-20 object-contain mb-2" />
+                Rede Catadores Recife
+              </div>
+              <div className="bg-white border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
+                <img src="/img/redeReciclaMais.png" alt="Olinda Sustentável Logo" className="w-20 h-20 object-contain mb-2" />
+                Olinda Sustentável
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 4. Mobilização social e empoderamento dos catadores */}
-      <section className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4" data-aos="fade-right">
+      <section id="mobilizacao" className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4 scroll-mt-32" data-aos="fade-right">
         <div className="flex-1 flex flex-col items-center justify-center order-2">
           <img src="/img/clima.png" alt="Mobilização social" className="w-full h-160 object-contain" />
         </div>
@@ -163,14 +184,24 @@ const HomeContent: React.FC = () => {
           <h2 className="text-5xl font-extrabold text-[#22c55e] mb-6 drop-shadow-lg">Mobilização social: catadores regenerando o mangue</h2>
           <p className="text-2xl text-gray-800 font-semibold mb-4">
             A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue.<br />
-            Apoiar essas iniciativas é investir em um futuro sustentável para todos.
+            Apoiar essas iniciativas é investir em um futuro sustentável para todos.<br /><br />
+            <span className="text-green-700 font-bold">Destaques da mobilização:</span>
+            <ul className="text-xl text-gray-800 font-medium list-disc list-inside mt-2 mb-2">
+              <li>Cooperativas e associações promovem mutirões de limpeza em rios, canais e manguezais.</li>
+              <li>Catadores atuam como agentes ambientais, conscientizando comunidades sobre reciclagem e descarte correto.</li>
+              <li>Projetos de educação ambiental em escolas e comunidades, integrando jovens à causa.</li>
+              <li>Parcerias com prefeituras e ONGs ampliam o impacto das ações de regeneração.</li>
+              <li>O trabalho dos catadores gera renda, dignidade e protagonismo social para centenas de famílias.</li>
+              <li>Recife e Olinda são referência nacional em mobilização de catadores para defesa do mangue.</li>
+            </ul>
+            <span className="text-green-900">Catador é guardião do mangue e da vida!</span>
           </p>
         </div>
       </section>
 
       {/* 5. Prova social */}
-      <section className="w-full flex flex-col items-center py-12 bg-black/50 max-w-screen-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Prova social: mensagens reais de esperança</h2>
+      <section id="prova-social" className="w-full flex flex-col items-center py-12 max-w-screen-2xl mx-auto scroll-mt-32">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#ef4444] mb-8 text-center drop-shadow-lg">Prova social: mensagens reais de esperança</h2>
         {loadingMessages ? (
           <div className="text-lg text-red-300 font-semibold">Carregando mensagens...</div>
         ) : donationMessages.length === 0 ? (
@@ -178,17 +209,17 @@ const HomeContent: React.FC = () => {
         ) : (
           <div className="flex flex-wrap justify-center gap-8 w-full max-w-screen-xl">
             {donationMessages.map((d, i) => (
-              <div key={i} className="bg-white/90 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-red-300 min-w-[220px] max-w-lg w-full">
-                <span className="text-lg font-bold text-red-500 mb-1">{d.name}</span>
-                <span className="text-[#232946] text-center italic">“{d.msg}”</span>
+              <div key={i} className="bg-[#ef4444] rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-red-300 min-w-[220px] max-w-lg w-full">
+                <span className="text-lg font-bold text-white mb-1">Recife</span>
+                <span className="text-white text-center italic">“{d.msg}”</span>
               </div>
             ))}
           </div>
         )}
       </section>
 
-      <footer className="bg-black/80 text-center py-6 text-white text-base mt-8 border-t border-red-300 font-semibold shadow-inner z-10">
-        © {new Date().getFullYear()} <span className="text-red-500 font-bold">MangueChain</span>. Juntos pela regeneração do mangue!
+      <footer className="bg-black/80 text-center py-6 text-white text-2xl mt-8 border-t border-red-300 font-semibold shadow-inner z-10">
+        © {new Date().getFullYear()} <span className="text-red-500 font-bold">BlockChain Tech Brazil</span>. Juntos pela regeneração do mangue!
       </footer>
       <style>{`
         html {

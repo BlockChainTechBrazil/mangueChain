@@ -35,11 +35,11 @@ const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, add
   if (address) {
     return (
       <button
-        className="flex items-center gap-2 px-5 py-2 rounded-full font-semibold shadow-lg transition-all duration-200 border-2 border-red-400 bg-gradient-to-r from-red-400 to-red-600 text-white hover:scale-105 hover:shadow-xl"
+        className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-xl shadow-lg transition-all duration-200 border-2 border-[#ef4444] bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 hover:shadow-xl"
         onClick={() => onConnect(null)}
-        style={{ minWidth: 180 }}
+        style={{ minWidth: 200 }}
       >
-        <svg className="w-5 h-5 mr-2 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 mr-2 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
         <span>{t('disconnect_wallet', 'Sair')}</span>
@@ -48,9 +48,9 @@ const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, add
   }
   return (
     <button
-      className="flex items-center gap-2 px-5 py-2 rounded-full font-semibold shadow-lg transition-all duration-200 border-2 border-primary bg-gradient-to-r from-primary to-blue-600 text-white hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/50"
+      className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-xl shadow-lg transition-all duration-200 border-2 border-[#ef4444] bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#ef4444]/50"
       onClick={handleConnect}
-      style={{ minWidth: 180 }}
+      style={{ minWidth: 200 }}
     >
       {walletIcon}
       <span>{t('connect_wallet', 'Conectar Carteira')}</span>

@@ -27,6 +27,13 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
           <img src={crabLogo} alt="Logo MangueChain" className="w-16 h-16 rounded-lg shadow border-2 border-red-200 bg-white object-contain" />
           <span className="text-4xl font-extrabold text-red-500 tracking-tight drop-shadow-sm">MangueChain</span>
         </div>
+        <nav className="md:flex gap-6 mx-8">
+          <a href="#oque-e-o-mangue" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">O que é o mangue</a>
+          <a href="#por-que-preservar" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Por que preservar</a>
+          <a href="#organizacoes" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Organizações</a>
+          <a href="#mobilizacao" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Mobilização</a>
+          <a href="#prova-social" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Prova social</a>
+        </nav>
         <div className="flex items-center gap-4">
           {/* Exibe endereço e saldo quando conectado */}
           {address && (
@@ -39,6 +46,11 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
           <LanguageSelector />
         </div>
       </header>
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
     </>
   );
 };
