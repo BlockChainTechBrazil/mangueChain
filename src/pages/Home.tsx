@@ -84,15 +84,15 @@ const HomeContent: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col font-sans">
-      <VideoBackground />
       <Header />
+      <VideoBackground />
 
-      <section className="relative flex flex-col md:flex-row items-center justify-center px-4 py-12 w-full flex-1 gap-12" data-aos="fade-up">
-        <div className="flex-1 flex flex-col items-center md:items-start justify-center text-center md:text-left z-10">
+      <section className="absolute left-1/2 top-64 -translate-x-1/2 flex flex-col items-center justify-center w-full flex-1 gap-12 max-w-screen-2xl mx-auto" data-aos="fade-up">
+        <div className="flex-1 flex flex-col items-center justify-center text-center z-10">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
             {t('title')}
           </h1>
-          <p className="text-xl md:text-2xl text-white mb-8 max-w-2/3 font-medium">
+          <p className="text-xl md:text-2xl text-white mb-8 w-full max-w-screen-md font-medium">
             {t('subtitle')}
             <br />
             <span className="text-red-300 font-bold">{t('transparency')}</span>, <span className="text-red-500 font-bold">{t('joy')}</span> and <span className="text-yellow-400 font-bold">{t('real_impact')}</span>.
@@ -103,14 +103,14 @@ const HomeContent: React.FC = () => {
       <Impact />
 
       {/* Mensagens reais de esperança */}
-      <section className="w-full flex flex-col items-center py-12 bg-black/50">
+      <section className="w-full flex flex-col items-center py-12 bg-black/50 max-w-screen-2xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">{t('messages_title')}</h2>
         {loadingMessages ? (
           <div className="text-lg text-red-300 font-semibold">Carregando mensagens...</div>
         ) : donationMessages.length === 0 ? (
           <div className="text-lg text-gray-400 font-semibold">Nenhuma mensagem encontrada.</div>
         ) : (
-          <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl">
+          <div className="flex flex-wrap justify-center gap-8 w-full max-w-screen-xl">
             {donationMessages.map((d, i) => (
               <div key={i} className="bg-white/90 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-red-300 min-w-[220px] max-w-lg w-full">
                 <span className="text-lg font-bold text-red-500 mb-1">{d.name}</span>
@@ -122,11 +122,11 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* Impact cards */}
-      <section className="w-full flex flex-col items-center py-16 bg-transparent">
+      <section className="w-full flex flex-col items-center py-16 bg-transparent max-w-screen-2xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-12 text-center drop-shadow-lg">{t('impact_title')}</h2>
-        <div className="flex flex-wrap justify-center gap-12 w-full max-w-6xl">
+        <div className="flex flex-wrap justify-center gap-12 w-full max-w-screen-xl">
           <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60" className="w-16 h-16"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF"/><circle cx="40" cy="45" r="3" fill="#000000"/><circle cx="60" cy="45" r="3" fill="#000000"/><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF"/><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF"/><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000"/><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000"/><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60" className="w-16 h-16"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             title={t('impact_crabs')}
             value="+120"
             description={t('impact_crabs_desc')}
@@ -134,7 +134,7 @@ const HomeContent: React.FC = () => {
             colorTo="#f97316"
           />
           <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF"/><circle cx="40" cy="45" r="3" fill="#000000"/><circle cx="60" cy="45" r="3" fill="#000000"/><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF"/><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF"/><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000"/><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000"/><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/></svg>}
+            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /></svg>}
             title={t('impact_donations')}
             value="R$ 500k+"
             description={t('impact_donations_desc')}
@@ -142,7 +142,7 @@ const HomeContent: React.FC = () => {
             colorTo="#eab308"
           />
           <ImpactCard
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF"/><circle cx="40" cy="45" r="3" fill="#000000"/><circle cx="60" cy="45" r="3" fill="#000000"/><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF"/><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF"/><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000"/><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000"/><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/></svg>}
+            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-12 h-12"><path d="M 20 50 C 20 30, 80 30, 80 50 C 80 70, 20 70, 20 50 Z" fill="#FFFFFF" /><circle cx="40" cy="45" r="3" fill="#000000" /><circle cx="60" cy="45" r="3" fill="#000000" /><path d="M 15 40 C 5 30, 5 20, 15 20 C 25 20, 25 30, 15 40 Z" fill="#FFFFFF" /><path d="M 85 40 C 95 30, 95 20, 85 20 C 75 20, 75 30, 85 40 Z" fill="#FFFFFF" /><path d="M 10 25 C 5 20, 10 15, 15 20 Z" fill="#000000" /><path d="M 90 25 C 95 20, 90 15, 85 20 Z" fill="#000000" /><path d="M 25 65 C 15 75, 15 85, 25 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 35 70 C 25 80, 25 90, 35 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 75 65 C 85 75, 85 85, 75 85" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /><path d="M 65 70 C 75 80, 75 90, 65 90" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round" /></svg>}
             title={t('impact_projects')}
             value="15+"
             description={t('impact_projects_desc')}
