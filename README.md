@@ -1,16 +1,16 @@
-# MangeChain
+# MangueChain
 
 **A decentralized donation platform for the revitalization of the Recife mangroves.**
 
-MangeChain is a decentralized donation platform built on blockchain technology, created to tackle one of the greatest environmental challenges: the degradation of the Recife mangroves.
+MangueChain is a decentralized donation platform built on blockchain technology, created to tackle one of the greatest environmental challenges: the degradation of the Recife mangroves.
 
-Leveraging the core properties of blockchain — transparency, security, and immutability — MangeChain transforms each transaction into a public manifestation of support and care, creating a digital wall of hope that connects donors and the mangrove ecosystem in a chain of restoration.
+Leveraging the core properties of blockchain — transparency, security, and immutability — MangueChain transforms each transaction into a public manifestation of support and care, creating a digital wall of hope that connects donors and the mangrove ecosystem in a chain of restoration.
 
-## 🌱 Why MangeChain Is Needed
+## 🌱 Why MangueChain Is Needed
 
 The mangroves of Recife face enormous challenges due to pollution and urban expansion. Access to resources for conservation and revitalization is often limited. Furthermore, most donation platforms today lack transparency, interactivity, and tangible rewards for engaged donors.
 
-## What Makes MangeChain Revolutionary
+## What Makes MangueChain Revolutionary
 
 ### 🔗 On-Chain Transparency
 
@@ -28,18 +28,18 @@ The top donor of each cycle (Top Donator) will be awarded an exclusive NFT, immo
 
 The platform is built with Solidity smart contracts, using proxies to enable upgrades, scalability, and maintainability without compromising decentralization.
 
-## 🚀 Why MangeChain Is the Future of Environmental Solidarity
+## 🚀 Why MangueChain Is the Future of Environmental Solidarity
 
-MangeChain addresses critical gaps in traditional donation platforms:
+MangueChain addresses critical gaps in traditional donation platforms:
 
 • Lack of transparency regarding the allocation of funds  
 • No rewards or recognition for donors  
 • No integration of emotional communication and direct impact  
 • Zero interactivity between donors and the cause  
 
-MangeChain combines blockchain and emotional design to create a decentralized network of solidarity, where everyone can contribute with real impact — and be recognized for it. 
+MangueChain combines blockchain and emotional design to create a decentralized network of solidarity, where everyone can contribute with real impact — and be recognized for it. 
 
-**MangeChain is not just a DApp — it's a decentralized social revolution, where every transaction transmits hope, and every block is a message of restoration.**
+**MangueChain is not just a DApp — it's a decentralized social revolution, where every transaction transmits hope, and every block is a message of restoration.**
 
 ## 🛠️ Technical Stack
 
