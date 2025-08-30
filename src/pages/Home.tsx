@@ -77,7 +77,22 @@ const HomeContent: React.FC = () => {
       <section className="absolute left-1/2 top-64 -translate-x-1/2 flex flex-col items-center justify-center w-full flex-1 gap-12 max-w-screen-2xl mx-auto" data-aos="fade-up">
         <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
           <div className="flex flex-col items-center justify-center w-full">
-            <img src="/Crab.png" alt="Mangue" className="w-32 h-32 mb-4 drop-shadow-xl" style={{ borderRadius: '50%', border: '4px solid #ef4444', background: '#fff' }} />
+            <img
+              src="/crabtoken.gif"
+              alt="Mangue"
+              className="w-64 h-64 mb-4 drop-shadow-xl animate-spin-slow"
+              style={{ borderRadius: '50%', background: '#fff' }}
+            />
+            <style>{`
+              @keyframes spin-slow {
+                0% { transform: rotateY(0deg); }
+                100% { transform: rotateY(360deg); }
+              }
+              .animate-spin-slow {
+                animation: spin-slow 3s linear infinite;
+                transform-style: preserve-3d;
+              }
+            `}</style>
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
               O que é o mangue?
             </h1>
@@ -90,36 +105,52 @@ const HomeContent: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Por que preservar o mangue é bom */}
-      <section className="w-full flex flex-col items-center py-12 bg-black/60 max-w-screen-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Por que preservar o mangue é importante?</h2>
-        <ul className="text-lg text-white font-medium flex flex-col gap-3 max-w-2xl mx-auto">
-          <li>• Protege as cidades de enchentes e erosão.</li>
-          <li>• Garante alimento e renda para milhares de famílias.</li>
-          <li>• Mantém a biodiversidade e o equilíbrio ambiental.</li>
-          <li>• Ajuda a combater as mudanças climáticas.</li>
-        </ul>
+      {/* 2. Por que preservar o mangue é importante? */}
+      <section className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4" data-aos="fade-right">
+        <div className="flex-1 flex flex-col items-start justify-center text-left order-1">
+          <h2 className="text-5xl font-extrabold text-[#ef4444] mb-6 drop-shadow-lg">Por que preservar o mangue é importante?</h2>
+          <ul className="text-2xl text-gray-800 font-semibold flex flex-col gap-4 mb-4">
+            <li>🌊 Protege as cidades de enchentes e erosão.</li>
+            <li>🍤 Garante alimento e renda para milhares de famílias.</li>
+            <li>🌱 Mantém a biodiversidade e o equilíbrio ambiental.</li>
+            <li>🌎 Ajuda a combater as mudanças climáticas.</li>
+          </ul>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center order-2">
+          <img src="/img/manguezal.png" alt="Manguezal" className="w-full max-w-md h-80 object-cover rounded-2xl border-4 border-yellow-300 shadow-xl" />
+        </div>
       </section>
 
       {/* 3. Recife e Olinda têm as melhores organizações de catadores */}
-      <section className="w-full flex flex-col items-center py-12 bg-black/70 max-w-screen-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Recife e Olinda: referência em organizações de catadores</h2>
-        <p className="text-lg text-white font-medium max-w-2xl mx-auto mb-4">
-          As cidades de Recife e Olinda são reconhecidas nacionalmente pela força e organização dos catadores de materiais recicláveis. Essas organizações são protagonistas na defesa do mangue e na regeneração do bioma.
-        </p>
-        <div className="flex flex-wrap gap-6 justify-center items-center mt-4 w-full">
-          <div className="bg-white/90 border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Associação Mangue Vivo</div>
-          <div className="bg-white/90 border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Rede Catadores Recife</div>
-          <div className="bg-white/90 border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Olinda Sustentável</div>
+      <section className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-gray-50 max-w-screen-2xl mx-auto gap-8 px-4" data-aos="fade-left">
+        <div className="flex-1 flex flex-col items-center justify-center order-1">
+          <img src="/img/caranguejo.png" alt="Catadores" className="w-full max-w-md h-80 object-contain rounded-2xl border-4 border-blue-400 shadow-xl" />
+        </div>
+        <div className="flex-1 flex flex-col items-start justify-center text-left order-2">
+          <h2 className="text-5xl font-extrabold text-[#2563eb] mb-6 drop-shadow-lg">Recife e Olinda: referência em organizações de catadores</h2>
+          <p className="text-2xl text-gray-800 font-semibold mb-4">
+            As cidades de Recife e Olinda são reconhecidas nacionalmente pela força e organização dos catadores de materiais recicláveis. Essas organizações são protagonistas na defesa do mangue e na regeneração do bioma.
+          </p>
+          <div className="flex flex-wrap gap-6 items-center w-full">
+            <div className="bg-white border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Associação Mangue Vivo</div>
+            <div className="bg-white border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Rede Catadores Recife</div>
+            <div className="bg-white border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[200px] font-semibold text-lg">Olinda Sustentável</div>
+          </div>
         </div>
       </section>
 
       {/* 4. Mobilização social e empoderamento dos catadores */}
-      <section className="w-full flex flex-col items-center py-12 bg-black/60 max-w-screen-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">Mobilização social: catadores regenerando o mangue</h2>
-        <p className="text-lg text-white font-medium max-w-2xl mx-auto">
-          A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue. Apoiar essas iniciativas é investir em um futuro sustentável para todos.
-        </p>
+      <section className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4" data-aos="fade-right">
+        <div className="flex-1 flex flex-col items-start justify-center text-left order-1">
+          <h2 className="text-5xl font-extrabold text-[#22c55e] mb-6 drop-shadow-lg">Mobilização social: catadores regenerando o mangue</h2>
+          <p className="text-2xl text-gray-800 font-semibold mb-4">
+            A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue.<br />
+            Apoiar essas iniciativas é investir em um futuro sustentável para todos.
+          </p>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center order-2">
+          <img src="/img/clima.png" alt="Mobilização social" className="w-full max-w-md h-80 object-contain rounded-2xl border-4 border-green-500 shadow-xl" />
+        </div>
       </section>
 
       {/* 5. Prova social */}
