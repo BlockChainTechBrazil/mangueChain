@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 import "./IDonation.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Bank is IDonation, Ownable {
+contract MangueChain is Donation, Ownable {
     struct Donation {
         uint256 amount;
         string message;
