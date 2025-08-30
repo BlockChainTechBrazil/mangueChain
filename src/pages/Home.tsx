@@ -73,14 +73,14 @@ const HomeContent: React.FC = () => {
       <Header />
       <VideoBackground />
 
-      {/* 1. O que é o mangue */}
-      <section className="absolute left-1/2 top-64 -translate-x-1/2 flex flex-col items-center justify-center w-full flex-1 gap-12 max-w-screen-2xl mx-auto" data-aos="fade-up">
+      {/* 0. Token */}
+      <section className="absolute left-1/2 top-36 -translate-x-1/2 flex flex-col items-center justify-center w-full flex-1 gap-12 max-w-screen-2xl mx-auto" data-aos="fade-up">
         <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
           <div className="flex flex-col items-center justify-center w-full">
             <img
               src="/crabtoken.gif"
               alt="Mangue"
-              className="w-64 h-64 mb-4 drop-shadow-xl animate-spin-slow"
+              className="w-48 h-48 mb-4 drop-shadow-xl animate-spin-slow"
               style={{ borderRadius: '50%', background: '#fff' }}
             />
             <style>{`
@@ -93,6 +93,17 @@ const HomeContent: React.FC = () => {
                 transform-style: preserve-3d;
               }
             `}</style>
+            <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
+              CrabCoin
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* 1. O que é o mangue */}
+      <section className=" flex items-center justify-center w-full flex-1 gap-12 mt-24 mx-auto" data-aos="fade-up">
+        <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
+          <div className="flex flex-col items-center justify-center w-full">           
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
               O que é o mangue?
             </h1>
