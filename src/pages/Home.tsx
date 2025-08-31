@@ -133,19 +133,19 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* 2. Por que preservar o mangue é importante? */}
-      <section id="por-que-preservar" className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl scroll-mt-32" data-aos="fade-right">
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 items-center">
-          <div className="flex flex-col items-start justify-center text-left w-full ml-64">
-            <h2 className="text-5xl font-extrabold text-[#ef4444] mb-6 drop-shadow-lg">Por que preservar o mangue é importante?</h2>
-            <ul className="text-2xl text-gray-800 font-semibold flex flex-col gap-4 mb-4">
-              <li>🌊 Protege as cidades de enchentes e erosão.</li>
-              <li>🍤 Garante alimento e renda para milhares de famílias.</li>
-              <li>🌱 Mantém a biodiversidade e o equilíbrio ambiental.</li>
-              <li>🌎 Ajuda a combater as mudanças climáticas.</li>
+      <section id="por-que-preservar" className="w-full py-12 sm:py-20 max-w-screen-3xl mx-auto px-2 sm:px-6 md:px-10 mt-8 sm:mt-12 rounded-2xl scroll-mt-32" data-aos="fade-right">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
+          <div className="flex flex-col items-start justify-center text-left w-full md:ml-24">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#ef4444] mb-4 md:mb-6 drop-shadow-lg">Por que preservar o mangue é importante?</h2>
+            <ul className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-800 font-semibold flex flex-col gap-3 sm:gap-4 mb-4">
+              <li><span className="mr-2">🌊</span> Protege as cidades de enchentes e erosão.</li>
+              <li><span className="mr-2">🍤</span> Garante alimento e renda para milhares de famílias.</li>
+              <li><span className="mr-2">🌱</span> Mantém a biodiversidade e o equilíbrio ambiental.</li>
+              <li><span className="mr-2">🌎</span> Ajuda a combater as mudanças climáticas.</li>
             </ul>
           </div>
-          <div className="flex flex-col items-center justify-center w-full">
-            <img src="/img/manguezal.png" alt="Manguezal" className="w-160 h-160 object-cover rounded-2xl border-4 border-yellow-300 shadow-xl" />
+          <div className="flex flex-col items-center justify-center w-full mt-6 md:mt-0">
+            <img src="/img/manguezal.png" alt="Manguezal" className="w-48 h-48 xs:w-64 xs:h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover rounded-2xl border-4 border-yellow-300 shadow-xl" />
           </div>
         </div>
       </section>
