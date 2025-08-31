@@ -151,27 +151,24 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* 3. Recife e Olinda têm as melhores organizações de catadores */}
-      <section id="organizacoes" className="w-full py-24 max-w-screen-3xl mx-auto px-10 mt-12 rounded-2xl scroll-mt-32" data-aos="fade-left">
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 items-center">
-          <div className="flex flex-col items-center justify-center w-full">
-            <img src="/img/caranguejo.png" alt="Catadores" className="w-160 h-160 object-contain" />
-          </div>
-          <div className="flex flex-col items-start justify-center text-left w-5/6">
-            <h2 className="text-5xl font-extrabold text-[#2563eb] mb-6 drop-shadow-lg">Recife e Olinda: referência em organizações de catadores</h2>
-            <p className="text-2xl text-gray-800 font-semibold mb-4">
+      <section id="organizacoes" className="w-full py-12 sm:py-20 max-w-screen-3xl mx-auto px-2 sm:px-6 md:px-10 mt-8 sm:mt-12 rounded-2xl scroll-mt-32" data-aos="fade-left">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
+          <div className="flex flex-col items-start justify-center text-left w-full md:w-5/6">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#2563eb] mb-4 md:mb-6 drop-shadow-lg">Recife e Olinda: referência em organizações de catadores</h2>
+            <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-800 font-semibold mb-3 md:mb-4">
               As cidades de Recife e Olinda são reconhecidas nacionalmente pela força e organização dos catadores de materiais recicláveis. Essas organizações são protagonistas na defesa do mangue e na regeneração do bioma.
             </p>
-            <div className="flex flex-wrap gap-6 items-center w-full">
-              <div className="bg-white border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
-                <img src="/img/redeReciclaMais.png" alt="Mangue Vivo Logo" className="w-20 h-20 object-contain mb-2" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full justify-center md:justify-start">
+              <div className="bg-white border-l-4 border-primary px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
+                <img src="/img/redeReciclaMais.png" alt="Mangue Vivo Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 Rede Recicla
               </div>
-              <div className="bg-white border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
-                <img src="/src/assets/img/cooperativa-rec-limpa.png" alt="Rede Catadores Recife Logo" className="w-20 h-20 object-contain mb-2" />
+              <div className="bg-white border-l-4 border-blue-500 px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
+                <img src="/src/assets/img/cooperativa-rec-limpa.png" alt="Rede Catadores Recife Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 Rede Catadores Recife
               </div>
-              <div className="bg-white border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
-                <img src="/src/assets/img/nva-olinda.jpeg" alt="Olinda Sustentável Logo" className="w-20 h-20 object-contain mb-2" />
+              <div className="bg-white border-l-4 border-green-500 px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
+                <img src="/src/assets/img/nva-olinda.jpeg" alt="Olinda Sustentável Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 Olinda Sustentável
               </div>
             </div>
@@ -181,25 +178,31 @@ const HomeContent: React.FC = () => {
 
       {/* 4. Mobilização social e empoderamento dos catadores */}
       <section id="mobilizacao" className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4 scroll-mt-32" data-aos="fade-right">
-        <div className="flex-1 flex flex-col items-center justify-center order-2">
-          <img src="/img/clima.png" alt="Mobilização social" className="w-full h-160 object-contain" />
-        </div>
-        <div className="flex-1 flex flex-col items-start justify-center text-left order-1">
-          <h2 className="text-5xl font-extrabold text-[#22c55e] mb-6 drop-shadow-lg">Mobilização social: catadores regenerando o mangue</h2>
-          <p className="text-2xl text-gray-800 font-semibold mb-4">
-            A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue.<br />
-            Apoiar essas iniciativas é investir em um futuro sustentável para todos.<br /><br />
-            <span className="text-green-700 font-bold">Destaques da mobilização:</span>
-            <ul className="text-xl text-gray-800 font-medium list-disc list-inside mt-2 mb-2">
-              <li>Cooperativas e associações promovem mutirões de limpeza em rios, canais e manguezais.</li>
-              <li>Catadores atuam como agentes ambientais, conscientizando comunidades sobre reciclagem e descarte correto.</li>
-              <li>Projetos de educação ambiental em escolas e comunidades, integrando jovens à causa.</li>
-              <li>Parcerias com prefeituras e ONGs ampliam o impacto das ações de regeneração.</li>
-              <li>O trabalho dos catadores gera renda, dignidade e protagonismo social para centenas de famílias.</li>
-              <li>Recife e Olinda são referência nacional em mobilização de catadores para defesa do mangue.</li>
-            </ul>
-            <span className="text-green-900">Catador é guardião do mangue e da vida!</span>
-          </p>
+        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-8">
+          <div className="flex flex-col items-center justify-center w-full md:w-auto mb-6 md:mb-0">
+            <img src="/img/caranguejo.png" alt="Catadores" className="w-40 h-40 xs:w-56 xs:h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover rounded-2xl border-4 border-orange-300 shadow-xl" />
+          </div>
+          <div className="flex-1 flex flex-col items-start justify-center text-left bg-white/80 rounded-2xl shadow-lg p-4 sm:p-8 border border-green-200">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl font-extrabold text-[#22c55e] mb-4 sm:mb-6 drop-shadow-lg text-left w-full" style={{textShadow: '0 2px 12px #22c55e22'}}>
+              Mobilização social: <span className="text-green-700">catadores regenerando o mangue</span>
+            </h2>
+            <div className="text-lg xs:text-xl sm:text-2xl text-gray-800 font-semibold mb-2 sm:mb-4 leading-relaxed">
+              A mobilização social já existe! Os catadores estão organizados, empoderados e liderando ações de limpeza, educação ambiental e regeneração do mangue.<br />
+              Apoiar essas iniciativas é investir em um futuro sustentável para todos.
+            </div>
+            <div className="w-full bg-gradient-to-r from-green-100/80 to-green-200/80 rounded-xl shadow p-3 sm:p-5 mb-3 border-l-4 border-green-400">
+              <span className="block text-green-700 font-extrabold text-xl sm:text-2xl mb-2">Destaques da mobilização:</span>
+              <ul className="flex flex-col gap-2 sm:gap-3 list-none pl-0 text-base xs:text-lg sm:text-xl text-green-900 font-medium">
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>Cooperativas e associações promovem mutirões de limpeza em rios, canais e manguezais.</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>Catadores atuam como agentes ambientais, conscientizando comunidades sobre reciclagem e descarte correto.</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>Projetos de educação ambiental em escolas e comunidades, integrando jovens à causa.</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>Parcerias com prefeituras e ONGs ampliam o impacto das ações de regeneração.</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>O trabalho dos catadores gera renda, dignidade e protagonismo social para centenas de famílias.</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 text-xl">✔️</span>Recife e Olinda são referência nacional em mobilização de catadores para defesa do mangue.</li>
+              </ul>
+            </div>
+            <span className="block text-green-900 font-bold text-lg sm:text-xl mt-2">Catador é guardião do mangue e da vida!</span>
+          </div>
         </div>
       </section>
 
