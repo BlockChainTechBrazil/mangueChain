@@ -4,7 +4,7 @@ import LanguageSelector from './LanguageSelector';
 import ConnectWallet from "./ConnectWallet";
 import { useDonation } from '../hooks/useDonation';
 
-const crabLogo = "/Crab.png";
+const crabLogo = `${import.meta.env.BASE_URL}Crab.png`;
 
 // Toast de notificação
 const Toast: React.FC<{ msg: string; type: 'success' | 'error'; onClose: () => void }> = ({ msg, type, onClose }) => (
@@ -26,22 +26,20 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
       )}
       <header className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur shadow-lg flex justify-between items-center px-4 md:px-8 py-4 md:py-6 border-b border-red-300">
         <div className="flex items-center gap-3">
-          <a href="/" className="flex items-center gap-3">
+          <a href={`${import.meta.env.BASE_URL}`} className="flex items-center gap-3">
             <img src={crabLogo} alt="Logo MangueChain" className="w-12 h-12 md:w-16 md:h-16 rounded-lg shadow border-2 border-red-200 bg-white object-contain" />
             <span className="text-2xl md:text-4xl font-extrabold text-red-500 tracking-tight drop-shadow-sm">MangueChain</span>
           </a>
         </div>
         {/* Mobile: menu e internacionalização lado a lado */}
-        <div className="md:hidden flex items-center gap-2">
-          <LanguageSelector />
-          <MobileMenu>
-            <ConnectWallet onConnect={setAddress} address={address} />
-          </MobileMenu>
+        <div className="md:hidden flex items-center gap-3">
+          <LanguageSelector large />
+          <ConnectWallet onConnect={setAddress} address={address} large />
         </div>
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center gap-4">
-          <ConnectWallet onConnect={setAddress} address={address} />
-          <LanguageSelector />
+        <div className="hidden md:flex items-center gap-6">
+          <ConnectWallet onConnect={setAddress} address={address} large />
+          <LanguageSelector large />
         </div>
       </header>
       {/* Modal de doação removido */}
@@ -68,40 +66,5 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
   );
 };
 
-// Componente MobileMenu para menu hamburguer responsivo
-const MobileMenu: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [open, setOpen] = React.useState(false);
-  const menuRef = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [open]);
-  return (
-    <div className="relative" ref={menuRef}>
-      <button
-        className="flex items-center justify-center w-10 h-10 rounded-md border border-red-200 bg-white text-red-500 shadow-md focus:outline-none"
-        onClick={() => setOpen((v) => !v)}
-        aria-label="Abrir menu"
-      >
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      {open && (
-        <div className="mobile-menu-content flex flex-col gap-2 mt-2 p-2">
-          {children}
-        </div>
-      )}
-    </div>
-  );
-};
+// MobileMenu removido
 export default Header;

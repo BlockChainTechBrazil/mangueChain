@@ -12,16 +12,16 @@ import Cooperativa from "./pages/Cooperativa";
 
 
 const Router: React.FC = () => (
-  <BrowserRouter basename="/">
+  <BrowserRouter basename="/mangueChain/">
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/sobre" element={<About />} />
-      <Route path="/como-doar" element={<HowToDonate />} />
-      <Route path="/impacto" element={<Impact />} />
-      <Route path="/parceiros" element={<Partners />} />
-      <Route path="/campanhas" element={<Campaigns />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/cooperativa" element={<Cooperativa />} />
+      <Route path="" element={<Home />} />
+      <Route path="sobre" element={<About />} />
+      <Route path="como-doar" element={<HowToDonate />} />
+      <Route path="impacto" element={<Impact />} />
+      <Route path="parceiros" element={<Partners />} />
+      <Route path="campanhas" element={<Campaigns />} />
+      <Route path="admin" element={<Admin />} />
+      <Route path="cooperativa" element={<Cooperativa />} />
     </Routes>
   </BrowserRouter>
 );

@@ -80,7 +80,7 @@ const HomeContent: React.FC = () => {
         <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
           <div className="flex flex-col items-center justify-center w-full">
             <img
-              src="/crabtoken.gif"
+              src={`${import.meta.env.BASE_URL}crabtoken.gif`}
               alt="Mangue"
               className="mb-4 drop-shadow-xl animate-spin-slow"
               style={{ borderRadius: '50%', background: '#fff', width: '96px', height: '96px', maxWidth: '25vw', maxHeight: '25vw', minWidth: '64px', minHeight: '64px' }}
@@ -147,7 +147,7 @@ const HomeContent: React.FC = () => {
             </ul>
           </div>
           <div className="flex flex-col items-center justify-center w-full mt-6 md:mt-0">
-            <img src="/img/manguezal.png" alt="Manguezal" className="w-48 h-48 xs:w-64 xs:h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover rounded-2xl border-4 border-yellow-300 shadow-xl" />
+            <img src={`${import.meta.env.BASE_URL}img/manguezal.png`} alt="Manguezal" className="w-48 h-48 xs:w-64 xs:h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover rounded-2xl border-4 border-yellow-300 shadow-xl" />
           </div>
         </div>
       </section>
@@ -162,15 +162,15 @@ const HomeContent: React.FC = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full justify-center md:justify-start">
               <div className="bg-white border-l-4 border-primary px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
-                <img src="/img/redeReciclaMais.png" alt="Mangue Vivo Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
+                <img src={`${import.meta.env.BASE_URL}img/redeReciclaMais.png`} alt="Mangue Vivo Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 {t('home_organizacao_rede_recicla')}
               </div>
               <div className="bg-white border-l-4 border-blue-500 px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
-                <img src="/src/assets/img/cooperativa-rec-limpa.png" alt="Rede Catadores Recife Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
+                <img src={`${import.meta.env.BASE_URL}img/redeReciclaMais.png`} alt="Rede Catadores Recife Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 {t('home_organizacao_rede_catadores')}
               </div>
               <div className="bg-white border-l-4 border-green-500 px-4 sm:px-6 md:px-8 py-4 sm:py-6 rounded-lg shadow min-w-[140px] sm:min-w-[180px] md:min-w-[220px] font-semibold text-base sm:text-lg flex flex-col items-center">
-                <img src="/src/assets/img/nva-olinda.jpeg" alt="Olinda Sustentável Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
+                <img src={`${import.meta.env.BASE_URL}img/redeReciclaMais.png`} alt="Olinda Sustentável Logo" className="w-14 h-14 sm:w-20 sm:h-20 object-contain mb-2" />
                 {t('home_organizacao_olinda_sustentavel')}
               </div>
             </div>
@@ -182,7 +182,7 @@ const HomeContent: React.FC = () => {
       <section id="mobilizacao" className="w-full flex flex-col md:flex-row items-center justify-center py-24 bg-white max-w-screen-2xl mx-auto gap-8 px-4 scroll-mt-32" data-aos="fade-right">
         <div className="flex flex-col md:flex-row items-center justify-center w-full gap-8">
           <div className="flex flex-col items-center justify-center w-full md:w-auto mb-6 md:mb-0">
-            <img src="/img/caranguejo.png" alt="Catadores" className="w-40 h-40 xs:w-56 xs:h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover rounded-2xl border-4 border-orange-300 shadow-xl" />
+            <img src={`${import.meta.env.BASE_URL}img/caranguejo.png`} alt="Catadores" className="w-40 h-40 xs:w-56 xs:h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover rounded-2xl border-4 border-orange-300 shadow-xl" />
           </div>
           <div className="flex-1 flex flex-col items-start justify-center text-left bg-white/80 rounded-2xl shadow-lg p-4 sm:p-8 border border-green-200">
             <h2 className="text-3xl xs:text-4xl sm:text-5xl font-extrabold text-[#22c55e] mb-4 sm:mb-6 drop-shadow-lg text-left w-full" style={{ textShadow: '0 2px 12px #22c55e22' }}>

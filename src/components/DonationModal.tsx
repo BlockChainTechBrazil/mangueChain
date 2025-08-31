@@ -36,7 +36,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ open, onClose, children }
         <div className="flex flex-col items-center justify-center min-h-[400px] p-8">
           {showCoin ? (
             <img
-              src="/crabtoken.gif"
+              src={`${import.meta.env.BASE_URL}crabtoken.gif`}
               alt={t('spinning_coin', 'Moeda girando')}
               className="w-32 h-32 animate-spin-slow mb-6"
               style={{ animation: 'spin 2s linear infinite' }}

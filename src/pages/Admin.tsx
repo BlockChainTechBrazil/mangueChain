@@ -1,3 +1,82 @@
+// Tipagem para cooperativa
+interface Cooperative {
+  address: string;
+  name: string;
+  cnpj: string;
+  cpf: string;
+  email: string;
+  vault: string;
+  owner: string;
+}
+// Componente para listar cooperativas (lado esquerdo)
+const CooperativeList: React.FC<{ cooperatives: Cooperative[], onNew: () => void }> = ({ cooperatives, onNew }) => {
+  const [showModal, setShowModal] = React.useState(false); // Para manter compatibilidade, mas não usado aqui
+  return (
+    <div className="bg-white rounded-xl shadow p-6 border border-blue-100 w-full">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold">Cooperativas Cadastradas</h2>
+        <button onClick={onNew} className="px-4 py-2 rounded-full bg-[#ef4444] text-white font-bold shadow hover:bg-[#f97316] transition text-sm">Nova Cooperativa</button>
+      </div>
+      {cooperatives.length === 0 ? (
+        <p>Nenhuma cooperativa cadastrada.</p>
+      ) : (
+        <ul className="divide-y divide-blue-50">
+          {cooperatives.map(coop => (
+            <li key={coop.address} className="py-3 flex flex-col gap-1">
+              <span className="font-bold text-[#ef4444]">{coop.name}</span>
+              <span className="text-xs font-mono text-gray-500">{coop.address}</span>
+              <span className="text-sm text-gray-700">{coop.email}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+// Componente para cadastrar cooperativa
+const CreateCooperativeForm: React.FC<{ onRegister: () => void }> = ({ onRegister }) => {
+  const [form, setForm] = useState({ vault: '', name: '', cnpj: '', cpf: '', email: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (!window.ethereum) throw new Error('MetaMask não encontrada.');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const provider = new ethers.BrowserProvider(window.ethereum as any);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(mangueChainAddress, mangueChainAbi, signer);
+      const tx = await contract.registerCooperative(form.vault, form.name, form.cnpj, form.cpf, form.email);
+      await tx.wait();
+      alert('Cooperativa cadastrada com sucesso!');
+      setForm({ vault: '', name: '', cnpj: '', cpf: '', email: '' });
+      onRegister();
+    } catch (err) {
+      alert('Erro ao cadastrar cooperativa.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow p-6 border border-blue-100 mb-8">
+      <h2 className="text-2xl font-bold mb-4">Cadastrar Nova Cooperativa</h2>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+        <input name="vault" value={form.vault} onChange={e => setForm(f => ({ ...f, vault: e.target.value }))} placeholder="Endereço do Cofre (vault)" className="input w-full px-3 py-2 border rounded" required />
+        <input name="name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Nome da Cooperativa" className="input w-full px-3 py-2 border rounded" required />
+        <input name="cnpj" value={form.cnpj} onChange={e => setForm(f => ({ ...f, cnpj: e.target.value }))} placeholder="CNPJ" className="input w-full px-3 py-2 border rounded" required />
+        <input name="cpf" value={form.cpf} onChange={e => setForm(f => ({ ...f, cpf: e.target.value }))} placeholder="CPF" className="input w-full px-3 py-2 border rounded" required />
+        <input name="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="E-mail" className="input w-full px-3 py-2 border rounded" required />
+        <div className="md:col-span-2 text-right">
+          <button type="submit" disabled={loading} className="px-6 py-2 rounded-full font-bold text-lg shadow bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 disabled:opacity-50 transition-all">
+            {loading ? 'Cadastrando...' : 'Cadastrar Cooperativa'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../components/Header';
 import { DonationProvider } from '../contexts/DonationContext';
@@ -6,228 +85,90 @@ import { mangueChainAddress, mangueChainAbi } from '../constants/contracts';
 // Removed duplicate imports
 
 // Tipagem para as tarefas/campanhas vindas do contrato
-interface Campaign {
-  id: number;
-  cooperative: string;
-  name: string;
-  description: string;
-  donated: number;
-  area: number;
-  finished: boolean;
-}
+// ...existing code...
 // --- Componentes Funcionais ---
 
-// Componente para o status do contrato e ações globais
-const ContractStatus: React.FC<{
-  contract: ethers.Contract | null;
-  paused: boolean;
-  fees: string;
-  fetchContractData: () => void;
-}> = ({ contract, paused, fees, fetchContractData }) => {
-  const [loading, setLoading] = useState(false);
-
-  const togglePause = async () => {
-    if (!contract) return;
-    setLoading(true);
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      let tx;
-      if (paused) {
-        tx = await contract.connect(signer).unpause();
-      } else {
-        tx = await contract.connect(signer).pause();
-      }
-      await tx.wait();
-      fetchContractData();
-    } catch (error) {
-      console.error("Erro ao alterar status do contrato:", error);
-      alert("Falha ao alterar status.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const withdrawFees = async () => {
-    if (!contract) return;
-    setLoading(true);
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const tx = await contract.connect(signer).withdrawFees();
-      await tx.wait();
-      fetchContractData();
-    } catch (error) {
-      console.error("Erro ao sacar taxas:", error);
-      alert("Falha ao sacar taxas.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="bg-white rounded-xl shadow p-6 border border-red-100 mb-8">
-      <h2 className="text-2xl font-bold mb-4">Status do Contrato</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg">
-          <span className="text-lg font-semibold">Estado</span>
-          <span className={`text-lg font-bold ${paused ? 'text-red-500' : 'text-green-500'}`}>
-            {paused ? 'Pausado' : 'Ativo'}
-          </span>
-          <button onClick={togglePause} disabled={loading} className="mt-2 px-4 py-2 rounded-full font-semibold text-sm bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-400 transition-all">
-            {loading ? 'Aguarde...' : (paused ? 'Reativar' : 'Pausar')}
-          </button>
-        </div>
-        <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg">
-          <span className="text-lg font-semibold">Taxas Acumuladas</span>
-          <span className="text-lg font-bold text-blue-600">{fees} ETH</span>
-          <button onClick={withdrawFees} disabled={loading || fees === '0.0'} className="mt-2 px-4 py-2 rounded-full font-semibold text-sm bg-green-500 text-white hover:bg-green-600 disabled:bg-gray-400 transition-all">
-            {loading ? 'Aguarde...' : 'Sacar Taxas'}
-          </button>
-        </div>
+// Componente para o status do contrato (apenas exibição)
+const ContractStatus: React.FC<{ paused: boolean; fees: string }> = ({ paused, fees }) => (
+  <div className="bg-white rounded-xl shadow p-6 border border-red-100 mb-8">
+    <h2 className="text-2xl font-bold mb-4">Status do Contrato</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg">
+        <span className="text-lg font-semibold">Estado</span>
+        <span className={`text-lg font-bold ${paused ? 'text-red-500' : 'text-green-500'}`}>{paused ? 'Pausado' : 'Ativo'}</span>
+      </div>
+      <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg">
+        <span className="text-lg font-semibold">Taxas Acumuladas</span>
+        <span className="text-lg font-bold text-blue-600">{fees} ETH</span>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
-// Componente para criar uma nova tarefa
-const CreateTaskForm: React.FC<{
-  contract: ethers.Contract | null;
-  fetchContractData: () => void;
-}> = ({ contract, fetchContractData }) => {
-  const [formData, setFormData] = useState({ copAddr: '', tipo: '', descr: '', area: '', georef: '' });
-  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+// MOCK: Campanhas
+const mockCampaigns = [
+  { id: 1, name: 'Campanha Limpeza', description: 'Limpeza do mangue e conscientização ambiental.', donated: 5, meta: 10, finished: false },
+  { id: 2, name: 'Campanha Reciclagem', description: 'Reciclagem de resíduos sólidos e educação ambiental.', donated: 3, meta: 3, finished: true },
+];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!contract) return;
-    setLoading(true);
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const tx = await contract.connect(signer).setTask(
-        formData.copAddr,
-        formData.tipo,
-        formData.descr,
-        BigInt(formData.area), // Corrected: use BigInt for uint256
-        formData.georef
-      );
-      await tx.wait();
-      setFormData({ copAddr: '', tipo: '', descr: '', area: '', georef: '' });
-      fetchContractData();
-      alert("Tarefa criada com sucesso!");
-    } catch (error) {
-      console.error("Erro ao criar tarefa:", error);
-      alert("Falha ao criar tarefa.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="bg-white rounded-xl shadow p-6 border border-red-100 mb-8">
-      <h2 className="text-2xl font-bold mb-4">Criar Nova Campanha (Tarefa)</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input name="copAddr" value={formData.copAddr} onChange={handleChange} placeholder="Endereço da Cooperativa" className="input w-full px-3 py-2 border rounded" required />
-        <input name="tipo" value={formData.tipo} onChange={handleChange} placeholder="Tipo (Nome da Campanha)" className="input w-full px-3 py-2 border rounded" required />
-        <textarea name="descr" value={formData.descr} onChange={handleChange} placeholder="Descrição" className="input w-full px-3 py-2 border rounded md:col-span-2" required />
-        <input name="area" value={formData.area} onChange={handleChange} placeholder="Área (m²)" type="number" className="input w-full px-3 py-2 border rounded" required />
-        <input name="georef" value={formData.georef} onChange={handleChange} placeholder="Georeferência" className="input w-full px-3 py-2 border rounded" required />
-        <div className="md:col-span-2 text-right">
-          <button type="submit" disabled={loading} className="px-6 py-2 rounded-full font-bold text-lg shadow bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 disabled:opacity-50 transition-all">
-            {loading ? 'Criando...' : 'Criar Campanha'}
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-// Componente para listar as tarefas e interagir com elas
-const TaskList: React.FC<{
-  contract: ethers.Contract | null;
-  campaigns: Campaign[];
-  loading: boolean;
-  fetchContractData: () => void;
-}> = ({ contract, campaigns, loading, fetchContractData }) => {
-
-  const handleCheckTask = async (id: number) => {
-    if (!contract) return;
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const tx = await contract.connect(signer).checkTask(id);
-      await tx.wait();
-      fetchContractData();
-      alert(`Tarefa ${id} marcada como finalizada!`);
-    } catch (error) {
-      console.error("Erro ao finalizar tarefa:", error);
-      alert("Falha ao finalizar tarefa.");
-    }
-  };
-
-  const handleAuditTask = async (id: number) => {
-    if (!contract) return;
-    const comments = prompt("Digite os comentários da auditoria:");
-    if (comments) {
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const tx = await contract.connect(signer).auditTask(id, comments);
-        await tx.wait();
-        fetchContractData();
-        alert(`Auditoria da tarefa ${id} registrada!`);
-      } catch (error) {
-        console.error("Erro ao auditar tarefa:", error);
-        alert("Falha ao auditar tarefa.");
-      }
-    }
-  };
-
-  if (loading) return <div className="text-center">Carregando tarefas...</div>;
-
-  return (
-    <div className="bg-white rounded-xl shadow p-6 border border-red-100">
-      <h2 className="text-2xl font-bold mb-4">Lista de Campanhas</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full w-full text-left">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="py-2 px-4">ID</th>
-              <th className="py-2 px-4">Nome</th>
-              <th className="py-2 px-4">Cooperativa</th>
-              <th className="py-2 px-4">Arrecadado (ETH)</th>
-              <th className="py-2 px-4">Status</th>
-              <th className="py-2 px-4">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {campaigns.map(c => (
-              <tr key={c.id} className="border-t">
-                <td className="py-2 px-4">{c.id}</td>
-                <td className="py-2 px-4 font-semibold">{c.name}</td>
-                <td className="py-2 px-4 font-mono text-xs">{c.cooperative}</td>
-                <td className="py-2 px-4">{c.donated.toLocaleString()}</td>
-                <td className="py-2 px-4">{c.finished ? <span className="text-green-600 font-bold">Finalizada</span> : <span className="text-yellow-600 font-bold">Em Andamento</span>}</td>
-                <td className="py-2 px-4 flex gap-2">
-                  {!c.finished && (
-                    <button onClick={() => handleCheckTask(c.id)} className="px-3 py-1 text-xs rounded-full bg-green-500 text-white hover:bg-green-600">
-                      Finalizar
-                    </button>
-                  )}
-                  <button onClick={() => handleAuditTask(c.id)} className="px-3 py-1 text-xs rounded-full bg-yellow-500 text-white hover:bg-yellow-600">
-                    Auditar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+const CreateCampaignForm: React.FC<{ onRegister: () => void, cooperatives: Cooperative[] }> = ({ onRegister, cooperatives }) => (
+  <div className="bg-white rounded-xl shadow p-6 border border-blue-100 w-full max-w-lg">
+    <h2 className="text-2xl font-bold mb-4">Cadastrar Nova Campanha</h2>
+    <form className="flex flex-col gap-4" onSubmit={e => { e.preventDefault(); onRegister(); }}>
+      <input className="input px-3 py-2 border rounded" placeholder="Nome da Campanha" required />
+      <textarea className="input px-3 py-2 border rounded" placeholder="Descrição" required />
+      <input className="input px-3 py-2 border rounded" placeholder="Meta (ETH)" required type="number" min="1" />
+      <select className="input px-3 py-2 border rounded" required defaultValue="">
+        <option value="" disabled>Selecione a Cooperativa</option>
+        {cooperatives.map(coop => (
+          <option key={coop.address} value={coop.address}>{coop.name}</option>
+        ))}
+      </select>
+      <div className="text-right">
+        <button type="submit" className="px-6 py-2 rounded-full font-bold text-lg shadow bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 transition-all">Cadastrar</button>
       </div>
+    </form>
+  </div>
+);
+
+const CampaignList: React.FC<{ cooperatives: Cooperative[] }> = ({ cooperatives }) => {
+  const [showModal, setShowModal] = React.useState(false);
+  return (
+    <div className="bg-white rounded-xl shadow p-6 border border-red-100 mt-8">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold">Campanhas</h2>
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 rounded-full bg-[#ef4444] text-white font-bold shadow hover:bg-[#f97316] transition">Nova Campanha</button>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {mockCampaigns.map(c => {
+          const percent = Math.min(100, Math.round((c.donated / c.meta) * 100));
+          return (
+            <div key={c.id} className="flex flex-col gap-2 bg-white rounded-xl border border-blue-100 shadow p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-[#ef4444] text-lg">{c.name}</span>
+                <span className={`px-3 py-1 rounded-full text-xs font-bold ${c.finished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{c.finished ? 'Finalizada' : 'Em Andamento'}</span>
+              </div>
+              <span className="text-gray-700 text-sm">{c.description}</span>
+              <div className="flex items-center gap-2 mt-2">
+                <span className="font-mono text-xs">Meta: {c.meta} ETH</span>
+                <span className="font-mono text-xs">Arrecadado: {c.donated} ETH</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-3 mt-2">
+                <div className={`h-3 rounded-full ${c.finished ? 'bg-green-400' : 'bg-yellow-400'}`} style={{ width: percent + '%' }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg relative">
+            <button onClick={() => setShowModal(false)} className="absolute top-2 right-2 text-2xl text-gray-400 hover:text-red-500">×</button>
+            <CreateCampaignForm onRegister={() => setShowModal(false)} cooperatives={cooperatives} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -237,34 +178,37 @@ const TaskList: React.FC<{
 
 const AdminContent: React.FC = () => {
   const [contract, setContract] = useState<ethers.Contract | null>(null);
+  // MOCK: Dados de cooperativas
+  const [cooperatives, setCooperatives] = useState<Cooperative[]>([
+    {
+      address: '0x1111111111111111111111111111111111111111',
+      name: 'Cooperativa Mangue Limpo',
+      cnpj: '12.345.678/0001-99',
+      cpf: '123.456.789-00',
+      email: 'contato@manguelimpomock.com',
+      vault: '0x2222222222222222222222222222222222222222',
+      owner: '0x3333333333333333333333333333333333333333',
+    },
+    {
+      address: '0x4444444444444444444444444444444444444444',
+      name: 'Cooperativa Recicla Mais',
+      cnpj: '98.765.432/0001-11',
+      cpf: '987.654.321-00',
+      email: 'contato@reciclamais.com',
+      vault: '0x5555555555555555555555555555555555555555',
+      owner: '0x6666666666666666666666666666666666666666',
+    },
+  ]);
   const [paused, setPaused] = useState(false);
   const [retainedFees, setRetainedFees] = useState('0.0');
-  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-  const [loading, setLoading] = useState(true);
+  // ...existing code...
   const [error, setError] = useState<string | null>(null);
 
+  // MOCK: Não busca dados reais
   const fetchContractData = useCallback(async () => {
-    if (!contract) return;
-    setLoading(true);
-    try {
-      // Buscar apenas o que existe no contrato
-      const [isPaused, fees] = await Promise.all([
-        contract.isPaused(),
-        contract.retainedFees()
-      ]);
-
-      setPaused(isPaused);
-      setRetainedFees(ethers.formatEther(fees));
-
-      // Não é possível buscar campanhas sem um método de contagem
-      setCampaigns([]);
-    } catch (err) {
-      console.error("Erro ao buscar dados do contrato:", err);
-      setError("Não foi possível carregar os dados do contrato. Verifique se está conectado na rede correta e se o contrato foi implantado.");
-    } finally {
-      setLoading(false);
-    }
-  }, [contract]);
+    setPaused(false);
+    setRetainedFees('0.0');
+  }, []);
 
   useEffect(() => {
     if (window.ethereum) {
@@ -273,7 +217,7 @@ const AdminContent: React.FC = () => {
       setContract(mangueChainContract);
     } else {
       setError("MetaMask não encontrada. Por favor, instale para usar a página de admin.");
-      setLoading(false);
+      // ...existing code...
     }
   }, []);
 
@@ -294,17 +238,31 @@ const AdminContent: React.FC = () => {
     );
   }
 
+  // Modal de cadastro de cooperativa
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="w-full min-h-screen flex flex-col font-sans bg-gray-50">
       <Header />
       <main className="max-w-7xl mx-auto w-full pt-24 sm:pt-32 pb-16 px-2 sm:px-4">
         <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-[#ef4444] text-center sm:text-left">Painel de Administração</h1>
-
-        <ContractStatus contract={contract} paused={paused} fees={retainedFees} fetchContractData={fetchContractData} />
-
-        <CreateTaskForm contract={contract} fetchContractData={fetchContractData} />
-
-        <TaskList contract={contract} campaigns={campaigns} loading={loading} fetchContractData={fetchContractData} />
+        <ContractStatus paused={paused} fees={retainedFees} />
+        <div className="flex flex-col md:flex-row gap-8 mt-8">
+          <div className="flex-1">
+            <CooperativeList cooperatives={cooperatives} onNew={() => setShowModal(true)} />
+          </div>
+          {/* Modal de cadastro de cooperativa */}
+          {showModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+              <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg relative">
+                <button onClick={() => setShowModal(false)} className="absolute top-2 right-2 text-2xl text-gray-400 hover:text-red-500">×</button>
+                <CreateCooperativeForm onRegister={() => { setShowModal(false); fetchContractData(); }} />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="mt-12">
+          <CampaignList cooperatives={cooperatives} />
+        </div>
       </main>
     </div>
   );
