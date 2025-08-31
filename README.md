@@ -25,7 +25,7 @@
 ## 🔗 Important Links
 
 - 🚀 [Production Site](#https://blockchaintechbrazil.github.io/mangueChain/) 
-- 🧑‍💻 [Live Demo](#)
+- 🧑‍💻 [Live Demo](#https://youtu.be/f_bO_E1BZ8s)
 - ✉️ [Contact](mailto:contato.davimoliveira@gmail.com)
 
 ---
