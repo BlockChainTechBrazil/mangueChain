@@ -1,7 +1,10 @@
 import React from "react";
 import LanguageSelector from './LanguageSelector';
+
 import ConnectWallet from "./ConnectWallet";
 import { useDonation } from '../hooks/useDonation';
+import DonationModal from './DonationModal';
+import { DonateFormModalContent } from '../pages/Donate';
 
 const crabLogo = "/Crab.png";
 
@@ -16,6 +19,7 @@ const Toast: React.FC<{ msg: string; type: 'success' | 'error'; onClose: () => v
 
 const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onToastClose?: () => void }> = ({ toastMsg, toastType, onToastClose }) => {
   const { address, setAddress, walletBalance } = useDonation();
+  const [openDonation, setOpenDonation] = React.useState(false);
   return (
     <>
       {/* Toast de notificação */}
@@ -37,15 +41,29 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
         <div className="flex items-center gap-4">
           {/* Exibe endereço e saldo quando conectado */}
           {address && (
-            <span className="text-base font-semibold text-red-600 bg-red-100 rounded-lg px-3 py-1">
-              {`${address}: ${walletBalance === "-" ? "..." : `${Number(walletBalance).toFixed(2)} ETH`}`}
-            </span>
+            <>
+              <span className="text-base font-semibold text-red-600 bg-red-100 rounded-lg px-3 py-1">
+                {`${address}: ${walletBalance === "-" ? "..." : `${Number(walletBalance).toFixed(2)} ETH`}`}
+              </span>
+              <button
+                className="flex items-center gap-2 px-4 py-2 rounded-full font-bold text-base shadow border-2 border-[#f97316] bg-gradient-to-r from-[#f97316] to-[#ef4444] text-white hover:scale-105 hover:shadow-xl transition-all"
+                onClick={() => setOpenDonation(true)}
+              >
+                <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8m0 0l-3-3m3 3l3-3" />
+                </svg>
+                Doar
+              </button>
+            </>
           )}
           <ConnectWallet onConnect={setAddress} address={address} />
           {/* Seletor de idioma com bandeira */}
           <LanguageSelector />
         </div>
       </header>
+      <DonationModal open={openDonation} onClose={() => setOpenDonation(false)}>
+        <DonateFormModalContent onSuccess={() => setOpenDonation(false)} />
+      </DonationModal>
       <style>{`
         html {
           scroll-behavior: smooth;
