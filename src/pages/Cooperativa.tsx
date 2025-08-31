@@ -40,56 +40,97 @@ const Cooperativa: React.FC = () => {
       <Header />
       <div className="w-full mx- mx-auto py-10 px-4">
         <h1 className="text-3xl font-bold mb-8 text-[#ef4444]">Minhas Campanhas</h1>
-        <div className="bg-white rounded-xl shadow p-6 border border-red-100 mx-8">
-          <table className="min-w-full text-left border">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="py-2 px-4">Nome</th>
-                <th className="py-2 px-4">Área</th>
-                <th className="py-2 px-4">Meta</th>
-                <th className="py-2 px-4">Arrecadado</th>
-                <th className="py-2 px-4">Início</th>
-                <th className="py-2 px-4">Fim</th>
-                <th className="py-2 px-4">Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              {campaigns.map(c => (
-                <tr key={c.id} className="border-t">
-                  <td className="py-2 px-4 font-semibold">{c.name}</td>
-                  <td className="py-2 px-4">{c.area}</td>
-                  <td className="py-2 px-4">R$ {c.goal.toLocaleString()}</td>
-                  <td className="py-2 px-4 text-green-700 font-bold">R$ {c.donated.toLocaleString()}</td>
-                  <td className="py-2 px-4">{c.startedAt || '-'}</td>
-                  <td className="py-2 px-4">{c.finishedAt || '-'}</td>
-                  <td className="py-2 px-4">
-                    {c.status === 'pronta' && c.donated >= c.goal && (
-                      <button
-                        className="px-4 py-2 rounded-full font-bold text-base shadow bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-green-600"
-                        onClick={() => iniciarCampanha(c.id)}
-                      >
-                        Iniciar Campanha
-                      </button>
-                    )}
-                    {c.status === 'em_andamento' && (
-                      <button
-                        className="px-4 py-2 rounded-full font-bold text-base shadow bg-gradient-to-r from-orange-500 to-orange-700 text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-orange-600"
-                        onClick={() => finalizarCampanha(c.id)}
-                      >
-                        Finalizar Campanha
-                      </button>
-                    )}
-                    {c.status === 'finalizada' && (
-                      <span className="text-green-700 font-bold">Finalizada</span>
-                    )}
-                    {c.status === 'aguardando' && (
-                      <span className="text-gray-400 italic">Aguardando meta</span>
-                    )}
-                  </td>
+        <div className="bg-white rounded-xl shadow p-2 sm:p-6 border border-red-100 mx-0 sm:mx-8">
+          {/* Tabela no desktop */}
+          <div className="hidden sm:block overflow-x-auto">
+            <table className="min-w-full text-left border">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="py-2 px-4">Nome</th>
+                  <th className="py-2 px-4">Área</th>
+                  <th className="py-2 px-4">Meta</th>
+                  <th className="py-2 px-4">Arrecadado</th>
+                  <th className="py-2 px-4">Início</th>
+                  <th className="py-2 px-4">Fim</th>
+                  <th className="py-2 px-4">Ação</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {campaigns.map(c => (
+                  <tr key={c.id} className="border-t">
+                    <td className="py-2 px-4 font-semibold">{c.name}</td>
+                    <td className="py-2 px-4">{c.area}</td>
+                    <td className="py-2 px-4">R$ {c.goal.toLocaleString()}</td>
+                    <td className="py-2 px-4 text-green-700 font-bold">R$ {c.donated.toLocaleString()}</td>
+                    <td className="py-2 px-4">{c.startedAt || '-'}</td>
+                    <td className="py-2 px-4">{c.finishedAt || '-'}</td>
+                    <td className="py-2 px-4">
+                      {c.status === 'pronta' && c.donated >= c.goal && (
+                        <button
+                          className="px-4 py-2 rounded-full font-bold text-base shadow bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-green-600"
+                          onClick={() => iniciarCampanha(c.id)}
+                        >
+                          Iniciar Campanha
+                        </button>
+                      )}
+                      {c.status === 'em_andamento' && (
+                        <button
+                          className="px-4 py-2 rounded-full font-bold text-base shadow bg-gradient-to-r from-orange-500 to-orange-700 text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-orange-600"
+                          onClick={() => finalizarCampanha(c.id)}
+                        >
+                          Finalizar Campanha
+                        </button>
+                      )}
+                      {c.status === 'finalizada' && (
+                        <span className="text-green-700 font-bold">Finalizada</span>
+                      )}
+                      {c.status === 'aguardando' && (
+                        <span className="text-gray-400 italic">Aguardando meta</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* Cards no mobile */}
+          <div className="flex flex-col gap-4 sm:hidden">
+            {campaigns.map(c => (
+              <div key={c.id} className="border rounded-lg p-4 shadow-sm bg-gray-50">
+                <div className="font-bold text-lg mb-1">{c.name}</div>
+                <div className="text-xs mb-1"><span className="font-semibold">Área:</span> {c.area}</div>
+                <div className="text-xs mb-1"><span className="font-semibold">Meta:</span> R$ {c.goal.toLocaleString()}</div>
+                <div className="text-xs mb-1 text-green-700 font-bold"><span className="font-semibold">Arrecadado:</span> R$ {c.donated.toLocaleString()}</div>
+                <div className="text-xs mb-1"><span className="font-semibold">Início:</span> {c.startedAt || '-'}</div>
+                <div className="text-xs mb-1"><span className="font-semibold">Fim:</span> {c.finishedAt || '-'}</div>
+                <div className="text-xs mt-2">
+                  <span className="font-semibold">Ação:</span> {' '}
+                  {c.status === 'pronta' && c.donated >= c.goal && (
+                    <button
+                      className="px-3 py-1 rounded-full font-bold text-xs shadow bg-gradient-to-r from-green-500 to-green-700 text-white border-2 border-green-600 mt-1"
+                      onClick={() => iniciarCampanha(c.id)}
+                    >
+                      Iniciar Campanha
+                    </button>
+                  )}
+                  {c.status === 'em_andamento' && (
+                    <button
+                      className="px-3 py-1 rounded-full font-bold text-xs shadow bg-gradient-to-r from-orange-500 to-orange-700 text-white border-2 border-orange-600 mt-1"
+                      onClick={() => finalizarCampanha(c.id)}
+                    >
+                      Finalizar Campanha
+                    </button>
+                  )}
+                  {c.status === 'finalizada' && (
+                    <span className="text-green-700 font-bold">Finalizada</span>
+                  )}
+                  {c.status === 'aguardando' && (
+                    <span className="text-gray-400 italic">Aguardando meta</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </DonationProvider>
