@@ -68,10 +68,10 @@ const Admin: React.FC = () => {
   return (
     <DonationProvider>
       <Header />
-      <div className="w-full mx-auto py-6 px-4">
-        <h1 className="text-4xl font-bold mb-8 text-[#ef4444]">Administração</h1>
-        <div className='mx-8'>
-          <div className="flex items-center justify-between mb-8">
+      <div className="w-full mx-auto py-6 px-2 sm:px-4">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-[#ef4444] text-center sm:text-left">Administração</h1>
+        <div className='mx-0 sm:mx-8'>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4 sm:gap-0">
             <h2 className="text-2xl font-bold">Cooperativas</h2>
             <button
               className="px-6 py-2 rounded-full font-bold text-lg shadow bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-[#ef4444]"
@@ -84,9 +84,10 @@ const Admin: React.FC = () => {
             </button>
           </div>
           {/* Listagem de cooperativas */}
-          <div className="bg-white rounded-xl shadow p-6 border border-red-100 mb-8">
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-left border">
+          <div className="bg-white rounded-xl shadow p-2 sm:p-6 border border-red-100 mb-8">
+            {/* Tabela no desktop, cards no mobile */}
+            <div className="hidden sm:block overflow-x-auto">
+              <table className="min-w-[600px] w-full text-left border text-xs sm:text-base">
                 <thead>
                   <tr className="bg-gray-100">
                     <th className="py-2 px-4">Nome</th>
@@ -114,20 +115,33 @@ const Admin: React.FC = () => {
                 </tbody>
               </table>
             </div>
+            {/* Cards no mobile */}
+            <div className="flex flex-col gap-4 sm:hidden">
+              {cooperatives.map(coop => {
+                const total = campaigns.filter(c => c.cooperativeId === coop.id).reduce((sum, c) => sum + c.donated, 0);
+                return (
+                  <div key={coop.id} className="border rounded-lg p-4 shadow-sm bg-gray-50">
+                    <div className="font-bold text-lg mb-1">{coop.name}</div>
+                    <div className="text-xs mb-1"><span className="font-semibold">CPF/CNPJ:</span> {coop.cpfCnpj}</div>
+                    <div className="text-xs mb-1"><span className="font-semibold">Carteira:</span> <span className="font-mono">{coop.wallet}</span></div>
+                    <div className="text-xs mb-1"><span className="font-semibold">Endereço:</span> {coop.address}</div>
+                    <div className="text-xs mb-1"><span className="font-semibold">Zona:</span> {coop.zone}</div>
+                    <div className="text-xs mt-2 text-green-700 font-bold"><span className="font-semibold">Total Arrecadado:</span> R$ {total.toLocaleString()}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           {isCoopModalOpen && (
             <div
-              style={{
-                position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.25)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
-              }}
+              className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-[1000] px-2"
               onClick={e => {
                 if (e.target === e.currentTarget) setIsCoopModalOpen(false);
               }}
             >
-              <div style={{ background: '#fff', borderRadius: 14, padding: 40, minWidth: 480, maxWidth: 600, boxShadow: '0 2px 24px #0003' }}>
-                <h2 style={{ marginBottom: 24, fontSize: 24, fontWeight: 700 }}>Cadastrar Cooperativa</h2>
-                <form style={{ display: 'flex', flexDirection: 'column', gap: 18 }} onSubmit={e => { e.preventDefault(); addCooperative(); setIsCoopModalOpen(false); }}>
+              <div className="bg-white rounded-xl p-4 sm:p-10 w-full max-w-[95vw] sm:max-w-xl shadow-2xl">
+                <h2 className="mb-6 text-xl sm:text-2xl font-bold">Cadastrar Cooperativa</h2>
+                <form className="flex flex-col gap-4" onSubmit={e => { e.preventDefault(); addCooperative(); setIsCoopModalOpen(false); }}>
                   <label className="font-semibold text-sm mb-1">Nome
                     <input className="input w-full mt-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Nome da cooperativa" name="name" value={coopForm.name} onChange={handleCoopChange} required />
                   </label>
@@ -143,16 +157,16 @@ const Admin: React.FC = () => {
                   <label className="font-semibold text-sm mb-1">Zona de atuação
                     <input className="input w-full mt-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Zona de atuação" name="zone" value={coopForm.zone} onChange={handleCoopChange} required />
                   </label>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 24 }}>
-                    <button type="button" onClick={() => setIsCoopModalOpen(false)} style={{ padding: '8px 24px', background: '#eee', border: 'none', borderRadius: 6, fontWeight: 500, cursor: 'pointer' }}>Cancelar</button>
-                    <button type="submit" style={{ padding: '8px 24px', background: '#1677ff', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}>Cadastrar</button>
+                  <div className="flex justify-end gap-3 mt-4">
+                    <button type="button" onClick={() => setIsCoopModalOpen(false)} className="px-4 py-2 bg-gray-200 rounded font-medium">Cancelar</button>
+                    <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded font-semibold">Cadastrar</button>
                   </div>
                 </form>
               </div>
             </div>
           )}
           <div className="mb-12">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4 sm:gap-0">
               <h2 className="text-2xl font-bold">Campanhas</h2>
               <button
                 className="px-6 py-2 rounded-full font-bold text-lg shadow bg-gradient-to-r from-[#ef4444] to-[#f97316] text-white hover:scale-105 hover:shadow-xl transition-all border-2 border-[#ef4444]"
@@ -164,9 +178,10 @@ const Admin: React.FC = () => {
                 Nova Campanha
               </button>
             </div>
-            <div className="bg-white rounded-xl shadow p-6 border border-red-100">
-              <div className="overflow-x-auto">
-                <table className="min-w-full text-left border">
+            <div className="bg-white rounded-xl shadow p-2 sm:p-6 border border-red-100">
+              {/* Tabela no desktop, cards no mobile */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="min-w-[600px] w-full text-left border text-xs sm:text-base">
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="py-2 px-4">Nome</th>
@@ -211,20 +226,49 @@ const Admin: React.FC = () => {
                   </tbody>
                 </table>
               </div>
+              {/* Cards no mobile */}
+              <div className="flex flex-col gap-4 sm:hidden">
+                {campaigns.map(c => {
+                  const coop = cooperatives.find(co => co.id === c.cooperativeId);
+                  return (
+                    <div key={c.id} className="border rounded-lg p-4 shadow-sm bg-gray-50">
+                      <div className="font-bold text-lg mb-1">{c.name}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Área:</span> {c.area}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Cooperativa:</span> {coop ? coop.name : '-'}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Meta:</span> R$ {c.goal.toLocaleString()}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Arrecadado:</span> R$ {c.donated.toLocaleString()}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Início:</span> {c.startedAt || '-'}</div>
+                      <div className="text-xs mb-1"><span className="font-semibold">Fim:</span> {c.finishedAt || '-'}</div>
+                      <div className="text-xs mt-2">
+                        <span className="font-semibold">Pagamento:</span> {' '}
+                        {!c.paid && c.donated >= c.goal ? (
+                          <button
+                            className="px-3 py-1 rounded-full font-bold text-xs shadow bg-gradient-to-r from-green-500 to-green-700 text-white border-2 border-green-600 mt-1"
+                            onClick={() => liberarPagamento(c.id)}
+                          >
+                            Liberar
+                          </button>
+                        ) : c.paid ? (
+                          <span className="text-green-600 font-bold">Já pago</span>
+                        ) : (
+                          <span className="text-gray-400 italic">Aguardando meta</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             {isCampModalOpen && (
               <div
-                style={{
-                  position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.25)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
-                }}
+                className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-[1000] px-2"
                 onClick={e => {
                   if (e.target === e.currentTarget) setIsCampModalOpen(false);
                 }}
               >
-                <div style={{ background: '#fff', borderRadius: 14, padding: 40, minWidth: 480, maxWidth: 600, boxShadow: '0 2px 24px #0003' }}>
-                  <h2 style={{ marginBottom: 24, fontSize: 24, fontWeight: 700 }}>Cadastrar Campanha</h2>
-                  <form style={{ display: 'flex', flexDirection: 'column', gap: 18 }} onSubmit={e => { e.preventDefault(); addCampaign(); setIsCampModalOpen(false); }}>
+                <div className="bg-white rounded-xl p-4 sm:p-10 w-full max-w-[95vw] sm:max-w-xl shadow-2xl">
+                  <h2 className="mb-6 text-xl sm:text-2xl font-bold">Cadastrar Campanha</h2>
+                  <form className="flex flex-col gap-4" onSubmit={e => { e.preventDefault(); addCampaign(); setIsCampModalOpen(false); }}>
                     <label className="font-semibold text-sm mb-1">Nome
                       <input className="input w-full mt-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Nome da campanha" name="name" value={campForm.name} onChange={handleCampChange} required />
                     </label>
@@ -237,9 +281,9 @@ const Admin: React.FC = () => {
                     <label className="font-semibold text-sm mb-1">Meta (R$)
                       <input className="input w-full mt-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Meta em reais" name="goal" value={campForm.goal} onChange={handleCampChange} type="number" required />
                     </label>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 24 }}>
-                      <button type="button" onClick={() => setIsCampModalOpen(false)} style={{ padding: '8px 24px', background: '#eee', border: 'none', borderRadius: 6, fontWeight: 500, cursor: 'pointer' }}>Cancelar</button>
-                      <button type="submit" style={{ padding: '8px 24px', background: '#1677ff', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}>Cadastrar</button>
+                    <div className="flex justify-end gap-3 mt-4">
+                      <button type="button" onClick={() => setIsCampModalOpen(false)} className="px-4 py-2 bg-gray-200 rounded font-medium">Cancelar</button>
+                      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded font-semibold">Cadastrar</button>
                     </div>
                   </form>
                 </div>
