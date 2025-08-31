@@ -80,8 +80,8 @@ const HomeContent: React.FC = () => {
             <img
               src="/crabtoken.gif"
               alt="Mangue"
-              className="w-48 h-48 mb-4 drop-shadow-xl animate-spin-slow"
-              style={{ borderRadius: '50%', background: '#fff' }}
+              className="mb-4 drop-shadow-xl animate-spin-slow"
+              style={{ borderRadius: '50%', background: '#fff', width: '96px', height: '96px', maxWidth: '25vw', maxHeight: '25vw', minWidth: '64px', minHeight: '64px' }}
             />
             <style>{`
               @keyframes spin-slow {
