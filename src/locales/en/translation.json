@@ -40,5 +40,18 @@
   "donate_form_title": "Amount in ETH",
   "donate_form_placeholder": "Ex: 0.05",
   "donate_form_button": "Donate Now",
-  "donate_form_invalid_amount_alert": "Please enter a valid amount in ETH"
+  "donate_form_invalid_amount_alert": "Please enter a valid amount in ETH",
+  "home": {
+    "oque_e_o_mangue": "What is the mangrove?",
+    "mangue_desc1": "The mangrove is a coastal ecosystem essential for marine life, city protection, and biodiversity maintenance.",
+    "mangue_desc2": "It filters water, shelters species, and protects against floods.",
+    "mangue_berco": "It is the cradle of life on the Brazilian coast!",
+    "curiosidades_mangue": "Mangrove curiosities:",
+    "curio_1": "One of the most productive ecosystems on the planet, nursery for fish, crabs, and shrimp.",
+    "curio_2": "Its roots filter pollutants and help maintain water quality.",
+    "curio_3": "Mangrove soil stores up to 5x more carbon than tropical forests, fighting global warming.",
+    "curio_4": "Source of livelihood for thousands of fishing and gathering families.",
+    "curio_5": "A symbol of resilience and adaptation, it survives in both fresh and saltwater areas.",
+    "preservar_mangue": "To preserve the mangrove is to preserve life, culture, and the future of coastal cities!"
+  }
 }

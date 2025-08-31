@@ -38,5 +38,18 @@
   "donate_form_title": "Valor em ETH",
   "donate_form_placeholder": "Ex: 0.05",
   "donate_form_button": "Doar Agora",
-  "donate_form_invalid_amount_alert": "Digite um valor válido em ETH"
+  "donate_form_invalid_amount_alert": "Digite um valor válido em ETH",
+  "home": {
+    "oque_e_o_mangue": "O que é o mangue?",
+    "mangue_desc1": "O mangue é um ecossistema costeiro essencial para a vida marinha, proteção das cidades e manutenção da biodiversidade.",
+    "mangue_desc2": "Ele filtra a água, abriga espécies e protege contra enchentes.",
+    "mangue_berco": "É o berço da vida no litoral brasileiro!",
+    "curiosidades_mangue": "Curiosidades sobre o mangue:",
+    "curio_1": "Um dos ecossistemas mais produtivos do planeta, berçário de peixes, caranguejos e camarões.",
+    "curio_2": "Suas raízes filtram poluentes e ajudam a manter a qualidade da água.",
+    "curio_3": "O solo do mangue armazena até 5x mais carbono que florestas tropicais, combatendo o aquecimento global.",
+    "curio_4": "Fonte de sustento para milhares de famílias de pescadores e catadores.",
+    "curio_5": "Símbolo de resistência e adaptação, sobrevive em áreas de água doce e salgada.",
+    "preservar_mangue": "Preservar o mangue é preservar a vida, a cultura e o futuro das cidades costeiras!"
+  }
 }

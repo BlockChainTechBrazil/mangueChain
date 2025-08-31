@@ -41,5 +41,18 @@
   "donate_form_title": "Valor en ETH",
   "donate_form_placeholder": "Ej: 0.05",
   "donate_form_button": "Donar Ahora",
-  "donate_form_invalid_amount_alert": "Por favor, introduce un valor válido en ETH"
+  "donate_form_invalid_amount_alert": "Por favor, introduce un valor válido en ETH",
+  "home": {
+    "oque_e_o_mangue": "¿Qué es el manglar?",
+    "mangue_desc1": "El manglar es un ecosistema costero esencial para la vida marina, la protección de las ciudades y el mantenimiento de la biodiversidad.",
+    "mangue_desc2": "Filtra el agua, alberga especies y protege contra inundaciones.",
+    "mangue_berco": "¡Es la cuna de la vida en la costa brasileña!",
+    "curiosidades_mangue": "Curiosidades sobre el manglar:",
+    "curio_1": "Uno de los ecosistemas más productivos del planeta, vivero de peces, cangrejos y camarones.",
+    "curio_2": "Sus raíces filtran contaminantes y ayudan a mantener la calidad del agua.",
+    "curio_3": "El suelo del manglar almacena hasta 5 veces más carbono que los bosques tropicales, combatiendo el calentamiento global.",
+    "curio_4": "Fuente de sustento para miles de familias de pescadores y recolectores.",
+    "curio_5": "Símbolo de resistencia y adaptación, sobrevive en áreas de agua dulce y salada.",
+    "preservar_mangue": "¡Preservar el manglar es preservar la vida, la cultura y el futuro de las ciudades costeras!"
+  }
 }

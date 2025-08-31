@@ -31,11 +31,11 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
             <span className="text-2xl md:text-4xl font-extrabold text-red-500 tracking-tight drop-shadow-sm">MangueChain</span>
           </a>
         </div>
-        {/* Mobile menu button */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile: menu e internacionalização lado a lado */}
+        <div className="md:hidden flex items-center gap-2">
+          <LanguageSelector />
           <MobileMenu>
             <ConnectWallet onConnect={setAddress} address={address} />
-            <LanguageSelector />
           </MobileMenu>
         </div>
         {/* Desktop menu */}
