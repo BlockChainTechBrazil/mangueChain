@@ -162,14 +162,14 @@ const HomeContent: React.FC = () => {
             <div className="flex flex-wrap gap-6 items-center w-full">
               <div className="bg-white border-l-4 border-primary px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
                 <img src="/img/redeReciclaMais.png" alt="Mangue Vivo Logo" className="w-20 h-20 object-contain mb-2" />
-                Rede Recicla+ Pernambuco
+                Rede Recicla
               </div>
               <div className="bg-white border-l-4 border-blue-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
-                <img src="/img/redeReciclaMais.png" alt="Rede Catadores Recife Logo" className="w-20 h-20 object-contain mb-2" />
+                <img src="/src/assets/img/cooperativa-rec-limpa.png" alt="Rede Catadores Recife Logo" className="w-20 h-20 object-contain mb-2" />
                 Rede Catadores Recife
               </div>
               <div className="bg-white border-l-4 border-green-500 px-8 py-6 rounded-lg shadow min-w-[220px] font-semibold text-lg flex flex-col items-center">
-                <img src="/img/redeReciclaMais.png" alt="Olinda Sustentável Logo" className="w-20 h-20 object-contain mb-2" />
+                <img src="/src/assets/img/nva-olinda.jpeg" alt="Olinda Sustentável Logo" className="w-20 h-20 object-contain mb-2" />
                 Olinda Sustentável
               </div>
             </div>

@@ -17,9 +17,18 @@ const walletIcon = (
   </svg>
 );
 
-const ConnectWallet: React.FC = () => {
+interface ConnectWalletProps {
+  onConnect?: (addr: string | null) => void;
+  address?: string | null;
+}
+
+const ConnectWallet: React.FC<ConnectWalletProps> = ({ onConnect, address: addressProp }) => {
   const navigate = useNavigate();
-  const { address, setAddress } = useDonation();
+
+  const { address: addressCtx, setAddress } = useDonation();
+  // Prioriza prop se passada, senão contexto
+  const address = addressProp !== undefined ? addressProp : addressCtx;
+  const setAddressFinal = onConnect || setAddress;
   const [isLogged, setIsLogged] = React.useState(false);
 
   useEffect(() => {
@@ -31,7 +40,7 @@ const ConnectWallet: React.FC = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
-        setAddress(accounts[0]);
+        setAddressFinal(accounts[0]);
       } catch (err) {
         alert("Erro ao conectar carteira: " + (err as Error).message);
       }
@@ -78,7 +87,7 @@ const ConnectWallet: React.FC = () => {
             <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/admin'); setMenuOpen(false); }}>Admin</button>
             <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/cooperativa'); setMenuOpen(false); }}>Cooperativa</button>
             <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/campanhas'); setMenuOpen(false); }}>Campanhas</button>
-            <button className="px-4 py-3 text-left hover:bg-red-50 text-red-600 font-bold border-t" onClick={() => { setAddress(null); setMenuOpen(false); }}>Sair</button>
+            <button className="px-4 py-3 text-left hover:bg-red-50 text-red-600 font-bold border-t" onClick={() => { setAddressFinal(null); setMenuOpen(false); }}>Sair</button>
           </div>
         )}
       </div>
