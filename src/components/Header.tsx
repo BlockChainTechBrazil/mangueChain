@@ -26,23 +26,12 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
       )}
       <header className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur shadow-lg flex justify-between items-center px-8 py-6 border-b border-red-300">
         <div className="flex items-center gap-3">
-          <img src={crabLogo} alt="Logo MangueChain" className="w-16 h-16 rounded-lg shadow border-2 border-red-200 bg-white object-contain" />
-          <span className="text-4xl font-extrabold text-red-500 tracking-tight drop-shadow-sm">MangueChain</span>
+          <a href="/" className="flex items-center gap-3">
+            <img src={crabLogo} alt="Logo MangueChain" className="w-16 h-16 rounded-lg shadow border-2 border-red-200 bg-white object-contain" />
+            <span className="text-4xl font-extrabold text-red-500 tracking-tight drop-shadow-sm">MangueChain</span>
+          </a>
         </div>
-        <nav className="md:flex gap-6 mx-8">
-          <a href="#oque-e-o-mangue" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">O que é o mangue</a>
-          <a href="#por-que-preservar" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Por que preservar</a>
-          <a href="#organizacoes" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Organizações</a>
-          <a href="#mobilizacao" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Mobilização</a>
-          <a href="#prova-social" className="text-lg font-bold text-red-600 hover:text-red-800 transition-colors">Prova social</a>
-        </nav>
         <div className="flex items-center gap-4">
-          {/* Exibe endereço e saldo quando conectado */}
-          {address && (
-            <span className="text-base font-semibold text-red-600 bg-red-100 rounded-lg px-3 py-1">
-              {`${address}: ${walletBalance === "-" ? "..." : `${Number(walletBalance).toFixed(2)} ETH`}`}
-            </span>
-          )}
           <ConnectWallet onConnect={setAddress} address={address} />
           {/* Seletor de idioma com bandeira */}
           <LanguageSelector />

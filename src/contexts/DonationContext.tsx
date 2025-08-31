@@ -46,7 +46,20 @@ const bankABI = [
 ];
 
 export const DonationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [address, setAddress] = useState<string | null>(null);
+  const [address, setAddressState] = useState<string | null>(() => {
+    // Recupera do localStorage ao iniciar
+    return localStorage.getItem('wallet_address') || null;
+  });
+
+  // Função para setar e persistir/remover no localStorage
+  const setAddress = (addr: string | null) => {
+    setAddressState(addr);
+    if (addr) {
+      localStorage.setItem('wallet_address', addr);
+    } else {
+      localStorage.removeItem('wallet_address');
+    }
+  };
   const [saldo, setSaldo] = useState<string>("-");
   const [loadingSaldo, setLoadingSaldo] = useState(false);
   const [donating, setDonating] = useState(false);

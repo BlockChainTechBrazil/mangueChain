@@ -1,4 +1,3 @@
-
 // Declaração global para window.ethereum
 declare global {
   interface Window {
@@ -6,10 +5,11 @@ declare global {
   }
 }
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { ethers } from "ethers";
+import { useDonation } from '../hooks/useDonation';
 
 const walletIcon = (
   <svg className="w-5 h-5 mr-2 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -17,15 +17,21 @@ const walletIcon = (
   </svg>
 );
 
-const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, address: string | null }> = ({ onConnect, address }) => {
+const ConnectWallet: React.FC = () => {
   const navigate = useNavigate();
+  const { address, setAddress } = useDonation();
+  const [isLogged, setIsLogged] = React.useState(false);
+
+  useEffect(() => {
+    setIsLogged(!!address);
+  }, [address]);
+
   const handleConnect = async () => {
     if (window.ethereum) {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
-        onConnect(accounts[0]);
-        navigate("/campanhas");
+        setAddress(accounts[0]);
       } catch (err) {
         alert("Erro ao conectar carteira: " + (err as Error).message);
       }
@@ -52,7 +58,7 @@ const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, add
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [menuOpen]);
 
-  if (address) {
+  if (isLogged && address) {
     return (
       <div className="relative" ref={menuRef}>
         <button
@@ -70,8 +76,9 @@ const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, add
           <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-red-100 z-50 flex flex-col">
             <div className="px-4 py-3 text-sm text-gray-700 border-b">Carteira: <span className="font-mono text-xs">{address}</span></div>
             <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/admin'); setMenuOpen(false); }}>Admin</button>
+            <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/cooperativa'); setMenuOpen(false); }}>Cooperativa</button>
             <button className="px-4 py-3 text-left hover:bg-red-50" onClick={() => { navigate('/campanhas'); setMenuOpen(false); }}>Campanhas</button>
-            <button className="px-4 py-3 text-left hover:bg-red-50 text-red-600 font-bold border-t" onClick={() => { onConnect(null); setMenuOpen(false); }}>Sair</button>
+            <button className="px-4 py-3 text-left hover:bg-red-50 text-red-600 font-bold border-t" onClick={() => { setAddress(null); setMenuOpen(false); }}>Sair</button>
           </div>
         )}
       </div>

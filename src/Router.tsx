@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "./components/About";
 
+import About from "./components/About";
 import HowToDonate from "./components/HowToDonate";
 import Impact from "./components/Impact";
 import Partners from "./components/Partners";
 import Home from "./pages/Home";
 import Campaigns from "./pages/Campaigns";
 import Admin from "./pages/Admin";
+import Cooperativa from "./pages/Cooperativa";
 
 
 const Router: React.FC = () => (
@@ -20,6 +21,7 @@ const Router: React.FC = () => (
       <Route path="/parceiros" element={<Partners />} />
       <Route path="/campanhas" element={<Campaigns />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/cooperativa" element={<Cooperativa />} />
     </Routes>
   </BrowserRouter>
 );
