@@ -104,27 +104,29 @@ const HomeContent: React.FC = () => {
       </section>
 
       {/* 1. O que é o mangue */}
-      <section id="oque-e-o-mangue" className=" flex items-center justify-center w-full flex-1 gap-12 mt-24 mx-auto scroll-mt-32" data-aos="fade-up">
+      <section id="oque-e-o-mangue" className="flex items-center justify-center w-full flex-1 gap-8 mt-20 sm:mt-24 mx-auto scroll-mt-32 px-2" data-aos="fade-up">
         <div className="flex-1 flex flex-col items-center justify-center text-center z-10 w-full">
           <div className="flex flex-col items-center justify-center w-full">
-            <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#ef4444] mb-2 md:mb-4 leading-tight drop-shadow-lg text-center" style={{ textShadow: '2px 2px 8px #0008' }}>
               O que é o mangue?
             </h1>
-            <div className="text-2xl md:text-3xl text-white mb-8 w-1/2 font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
-              <p>
-                O mangue é um ecossistema costeiro fundamental para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
+            <div className="text-base xs:text-lg sm:text-xl md:text-2xl text-white mb-4 md:mb-6 w-full sm:w-4/5 md:w-1/2 font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-3 sm:p-4 md:p-6 rounded-2xl shadow-lg border-2 border-[#ef4444] mx-auto">
+              <p className="mb-3 leading-relaxed">
+                O mangue é um ecossistema costeiro essencial para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
                 Ele filtra a água, abriga espécies e protege contra enchentes.<br />
-                <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span><br /><br />
-                <span className="text-white font-semibold">Curiosidades sobre o mangue:</span>
+                <span className="text-yellow-300 font-bold">É o berço da vida no litoral brasileiro!</span>
               </p>
-              <ul className="text-xl text-white font-medium list-disc list-inside mt-2 mb-2">
-                <li>O mangue é um dos ecossistemas mais produtivos do planeta, servindo de berçário para peixes, caranguejos e camarões.</li>
-                <li>Suas raízes filtram poluentes e ajudam a manter a qualidade da água.</li>
-                <li>O solo do mangue armazena até 5x mais carbono que florestas tropicais, combatendo o aquecimento global.</li>
-                <li>É fonte de sustento para milhares de famílias de pescadores e catadores.</li>
-                <li>O manguezal é símbolo de resistência e adaptação, sobrevivendo em áreas de água doce e salgada.</li>
-              </ul>
-              <span className="text-orange-200">Preservar o mangue é preservar a vida, a cultura e o futuro das cidades costeiras!</span>
+              <div className="bg-white/10 rounded-xl p-2 sm:p-4 mt-2 mb-2">
+                <span className="text-white font-semibold block mb-2">Curiosidades sobre o mangue:</span>
+                <ul className="text-base xs:text-lg sm:text-xl text-white font-medium flex flex-col gap-2 list-none pl-0 text-left">
+                  <li><span className="mr-2">🦀</span> Um dos ecossistemas mais produtivos do planeta, berçário de peixes, caranguejos e camarões.</li>
+                  <li><span className="mr-2">💧</span> Suas raízes filtram poluentes e ajudam a manter a qualidade da água.</li>
+                  <li><span className="mr-2">🌱</span> O solo do mangue armazena até 5x mais carbono que florestas tropicais, combatendo o aquecimento global.</li>
+                  <li><span className="mr-2">👩‍👩‍👦‍👦</span> Fonte de sustento para milhares de famílias de pescadores e catadores.</li>
+                  <li><span className="mr-2">🌊</span> Símbolo de resistência e adaptação, sobrevive em áreas de água doce e salgada.</li>
+                </ul>
+              </div>
+              <span className="text-orange-200 block mt-2 text-base sm:text-lg">Preservar o mangue é preservar a vida, a cultura e o futuro das cidades costeiras!</span>
             </div>
           </div>
         </div>
