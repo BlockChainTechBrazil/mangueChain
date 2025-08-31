@@ -10,7 +10,6 @@ interface Cooperative {
 }
 // Componente para listar cooperativas (lado esquerdo)
 const CooperativeList: React.FC<{ cooperatives: Cooperative[], onNew: () => void }> = ({ cooperatives, onNew }) => {
-  const [showModal, setShowModal] = React.useState(false); // Para manter compatibilidade, mas não usado aqui
   return (
     <div className="bg-white rounded-xl shadow p-6 border border-blue-100 w-full">
       <div className="flex items-center justify-between mb-4">
@@ -179,7 +178,7 @@ const CampaignList: React.FC<{ cooperatives: Cooperative[] }> = ({ cooperatives 
 const AdminContent: React.FC = () => {
   const [contract, setContract] = useState<ethers.Contract | null>(null);
   // MOCK: Dados de cooperativas
-  const [cooperatives, setCooperatives] = useState<Cooperative[]>([
+  const [cooperatives] = useState<Cooperative[]>([
     {
       address: '0x1111111111111111111111111111111111111111',
       name: 'Cooperativa Mangue Limpo',

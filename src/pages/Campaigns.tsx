@@ -7,7 +7,7 @@ import { DonationProvider } from '../contexts/DonationContext';
 const CampaignsContent: React.FC = () => {
   // Removido: campanhas não são usadas pois não há método para buscar
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   // MOCK: Simula carregamento e exibe campanhas mockadas
   useEffect(() => {

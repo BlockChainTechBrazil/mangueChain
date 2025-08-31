@@ -34,11 +34,11 @@ const Header: React.FC<{ toastMsg?: string; toastType?: 'success' | 'error'; onT
         {/* Mobile: menu e internacionalização lado a lado */}
         <div className="md:hidden flex items-center gap-3">
           <LanguageSelector large />
-          <ConnectWallet onConnect={setAddress} address={address} large />
+          <ConnectWallet onConnect={setAddress} address={address} />
         </div>
         {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-6">
-          <ConnectWallet onConnect={setAddress} address={address} large />
+          <ConnectWallet onConnect={setAddress} address={address} />
           <LanguageSelector large />
         </div>
       </header>

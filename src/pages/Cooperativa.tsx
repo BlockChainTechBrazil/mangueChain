@@ -1,9 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import { DonationProvider } from '../contexts/DonationContext';
-import { ethers, Contract } from 'ethers';
-import type { Eip1193Provider } from 'ethers';
-import { cooperativeAbi, mangueChainAbi, mangueChainAddress } from '../constants/contracts';
+import { ethers } from 'ethers';
 
 // --- Type Definitions ---
 interface Campaign {
@@ -93,104 +91,30 @@ const CooperativeDashboard: React.FC<{
 // --- Main Component ---
 
 const CooperativaContent: React.FC = () => {
-  const [registerLoading, setRegisterLoading] = useState(false);
-  // Função para cadastrar cooperativa
-  const handleRegisterCooperative = async () => {
-    setRegisterLoading(true);
-    try {
-      if (!window.ethereum) {
-        alert("MetaMask não encontrada.");
-        return;
-      }
-      const provider = new ethers.BrowserProvider(window.ethereum as Eip1193Provider);
-      const signer = await provider.getSigner();
-      const mangueContract = new ethers.Contract(mangueChainAddress, mangueChainAbi, signer);
-      const tx = await mangueContract.registerCooperative(
-        form.vault,
-        form.name,
-        form.cnpj,
-        form.cpf,
-        form.email
-      );
-      await tx.wait();
-      alert("Cooperativa cadastrada com sucesso!");
-      setForm({ vault: '', name: '', cnpj: '', cpf: '', email: '' });
-    } catch (err) {
-      console.error("Erro ao cadastrar cooperativa:", err);
-      alert("Falha ao cadastrar cooperativa. Verifique os dados e tente novamente.");
-    } finally {
-      setRegisterLoading(false);
-    }
-  };
+  // const [registerLoading, setRegisterLoading] = useState(false);
+  // const handleRegisterCooperative = async () => {};
   // MOCK: Dados da cooperativa
-  const [coopAddress, setCoopAddress] = useState('0x1111111111111111111111111111111111111111');
-  const [cooperativeContract, setCooperativeContract] = useState<CooperativeContract | null>({
+  // const [coopAddress] = useState('0x1111111111111111111111111111111111111111');
+  const [cooperativeContract] = useState<CooperativeContract | null>({
     target: '0x1111111111111111111111111111111111111111',
     withdraw: async () => ({ hash: '0xMOCKTX', wait: async () => ({}) }),
     getVaultAddress: async () => '0x2222222222222222222222222222222222222222',
   } as any);
-  const [balance, setBalance] = useState('10.0');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [balance] = useState('10.0');
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
   // Campos para criar cooperativa
-  const [form, setForm] = useState({
-    vault: '',
-    name: '',
-    cnpj: '',
-    cpf: '',
-    email: ''
-  });
+  // const [form, setForm] = useState({
+  //   vault: '',
+  //   name: '',
+  //   cnpj: '',
+  //   cpf: '',
+  //   email: ''
+  // });
 
-  const loadCooperativeData = useCallback(async () => {
-    if (!ethers.isAddress(coopAddress)) {
-      setError("Endereço de contrato inválido.");
-      return;
-    }
-    setError(null);
-    setLoading(true);
+  // const loadCooperativeData = useCallback(async () => {});
 
-    try {
-      if (!window.ethereum) {
-        throw new Error("MetaMask não encontrada.");
-      }
-      const provider = new ethers.BrowserProvider(window.ethereum as Eip1193Provider);
-      // Sobrescrever o tipo para garantir que withdraw existe
-      const coopContract = new Contract(coopAddress, cooperativeAbi, provider) as Contract & {
-        withdraw: () => Promise<ethers.ContractTransactionResponse>;
-        getVaultAddress: () => Promise<string>;
-      };
-      setCooperativeContract(coopContract);
-      // Buscar saldo
-      const coopBalance = await provider.getBalance(coopContract.target);
-      setBalance(ethers.formatEther(coopBalance));
-    } catch (err) {
-      console.error("Erro ao carregar dados da cooperativa:", err);
-      setError("Falha ao carregar dados. Verifique o endereço e sua conexão.");
-      setCooperativeContract(null);
-    } finally {
-      setLoading(false);
-    }
-  }, [coopAddress]);
-
-  const handleWithdraw = async () => {
-    if (!cooperativeContract) return;
-    try {
-      if (!window.ethereum) {
-        alert("MetaMask não encontrada.");
-        return;
-      }
-      const provider = new ethers.BrowserProvider(window.ethereum as Eip1193Provider);
-      const signer = await provider.getSigner();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const tx = await (cooperativeContract as any).connect(signer)["withdraw"]();
-      await tx.wait();
-      alert("Saque realizado com sucesso!");
-      loadCooperativeData(); // Refresh data
-    } catch (error) {
-      console.error("Erro ao sacar:", error);
-      alert("Falha ao realizar o saque.");
-    }
-  };
+  // const handleWithdraw = async () => {};
 
   return (
     <div className="w-full min-h-screen flex flex-col font-sans bg-gray-50">
