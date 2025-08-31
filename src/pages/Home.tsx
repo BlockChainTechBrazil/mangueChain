@@ -229,8 +229,10 @@ const HomeContent: React.FC = () => {
         © {new Date().getFullYear()} <span className="text-red-500 font-bold">BlockChain Tech Brazil</span>. Juntos pela regeneração do mangue!
       </footer>
       <style>{`
-        html {
+        html, body {
           scroll-behavior: smooth;
+          overflow-x: hidden !important;
+          width: 100vw;
         }
       `}</style>
     </div>
