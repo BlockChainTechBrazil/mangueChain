@@ -5,7 +5,6 @@
 
 ## 📑 Table of Contents
 
-- [📑 Table of Contents](#-table-of-contents)
 - [🔗 Important Links](#-important-links)
 - [🏗️ Project Architecture](#-project-architecture)
 - [🎯 About the Project](#-about-the-project)
