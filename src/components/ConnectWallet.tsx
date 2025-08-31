@@ -7,6 +7,7 @@ declare global {
 }
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { ethers } from "ethers";
 
@@ -17,12 +18,14 @@ const walletIcon = (
 );
 
 const ConnectWallet: React.FC<{ onConnect: (address: string | null) => void, address: string | null }> = ({ onConnect, address }) => {
+  const navigate = useNavigate();
   const handleConnect = async () => {
     if (window.ethereum) {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
         onConnect(accounts[0]);
+        navigate("/campanhas");
       } catch (err) {
         alert("Erro ao conectar carteira: " + (err as Error).message);
       }
