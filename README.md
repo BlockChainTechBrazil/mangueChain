@@ -1,4 +1,3 @@
-
 # 🦀 MangueChain
 
 ![Logo da MangueChain](./public/Crab.png)
@@ -25,10 +24,8 @@
 
 ## 🔗 Important Links
 
-- 🚀 [Production Site](#) 
-- 📽️ [Pitch Deck](#)
+- 🚀 [Production Site](#https://blockchaintechbrazil.github.io/mangueChain/) 
 - 🧑‍💻 [Live Demo](#)
-- 💬 [Community / Discussions](#)
 - ✉️ [Contact](mailto:contato.davimoliveira@gmail.com)
 
 ---
@@ -37,9 +34,41 @@
 
 ## 🏗️ Project Architecture
 
-<!-- Describe the general architecture of the project here, if desired. -->
-
-
+```
+manguechain/
+├── contracts/
+│   ├── MangueChain.sol         
+│   ├── Cooperative.sol         
+│   └── ...                    
+├── public/
+│   ├── Crab.png
+│   ├── crabtoken.gif
+│   ├── favicon.ico
+│   ├── MangueRecife.mp4
+│   ├── uml.jpeg
+│   ├── vite.svg
+│   └── img/
+│       └── ...                 
+├── scripts/
+│   ├── uploadToPinata.js        
+│   └── crabtoken.png
+├── src/
+│   ├── assets/                 
+│   ├── components/             
+│   ├── contexts/                
+│   ├── hooks/                 
+│   ├── locales/               
+│   ├── pages/                  
+│   ├── App.tsx                 
+│   ├── main.tsx               
+│   └── ...                   
+├── index.html                  
+├── package.json                
+├── tailwind.config.js          
+├── vite.config.ts          
+├── tsconfig.json               
+└── README.md         
+```
 
 ## 🎯 About the Project
 
@@ -70,6 +99,15 @@ MangueChain transforms donations into impactful actions by combining blockchain 
 The mangroves of Recife face severe degradation, while waste pickers — essential for environmental preservation — are undervalued. Traditional donation models lack transparency and impact traceability, making it difficult for donors to see real results from their contributions.
 
 
+## 🚀 Why is MangueChain the future of environmental solidarity?
+
+MangueChain addresses critical gaps in traditional donation platforms:
+
+- Lack of transparency in fund allocation
+- No recognition/reward for donors
+- Lack of emotional communication and direct impact
+- Zero interactivity between donors and the cause
+
 ## 🛠️ Technologies Used
 
 - **Frontend**: React + TypeScript + Tailwind CSS
@@ -82,23 +120,22 @@ The mangroves of Recife face severe degradation, while waste pickers — essenti
 ## 📍 Roadmap
 
 ### Version 1.0 (MVP) - ✅ Completed
-- [x] Basic pet registration system
+- [x] 3 Uses Cases: Donator, Adm and Cooperative
 
 ### Version 1.1 🎯 Planned
+- [ ] Public Mural of Feedbacks (Social Proof)
 - [ ] Search and filter system
+- [ ] Partnerships with companies
 
+### Version 1.2 In The Future 
+- [ ] Tokenomics - Social Token
+- [ ] Improve local economy locations
 
 ## 🗺️ Usage Flow
 
 ![MangueChain usage flow](/public/uml.jpeg)
 
-
-
-
-
-
-## 🌱 Por que o MangueChain é necessário?
-
+## 🌱 Why MangeChain is Necessary?
 
 The mangroves of Recife face enormous challenges due to pollution and urban expansion. Access to resources for conservation is limited, and current donation platforms lack transparency, interactivity, and tangible rewards for engaged donors.
 
@@ -117,18 +154,24 @@ The top donor of each cycle receives an exclusive NFT, immortalizing their contr
 Platform built with Solidity contracts and proxies for upgrades, scalability, and maintenance without losing decentralization.
 
 
-## 🚀 Why is MangueChain the future of environmental solidarity?
-
-MangueChain addresses critical gaps in traditional donation platforms:
-
-- Lack of transparency in fund allocation
-- No recognition/reward for donors
-- Lack of emotional communication and direct impact
-- Zero interactivity between donors and the cause
-
 MangueChain combines blockchain and emotional design to create a decentralized network of solidarity, where everyone can contribute with real impact — and be recognized for it.
 
 **MangueChain is not just a DApp — it's a decentralized social revolution, where every transaction transmits hope and every block is a message of restoration.**
+
+
+## Project Structure
+
+**Main directories:**
+- `contracts/`: Solidity smart contracts.
+- `src/`: React frontend source code (contexts, hooks, pages, components).
+- `public/`: Static files and images.
+- `scripts/`: Utility scripts for deployment, upload, etc.
+
+**Key contracts:**
+- `MangueChain.sol`: manages tasks, donations, audit, fees, and pause control.
+- `Cooperative.sol`: cooperative contract.
+- `CrabNFT.sol`: mint and burn nft
+Adapt as your project evolves! If you want a more detailed description for each folder/file, just ask.
 
 ## 👥 Team
 
