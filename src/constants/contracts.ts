@@ -1,7 +1,13 @@
-export const mangueChainAddress = "0x2611FbBcd40b0cbad3d3B04143dbA2F5a61A4fbB";
+export const mangueChainAddress = "0x10F17582f65dF9361f9304461919dA2BaedEcF0A";
 export const mangueChainAbi = [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "crabTokenAddress",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -26,6 +32,25 @@ export const mangueChainAbi = [
 		],
 		"name": "OwnableUnauthorizedAccount",
 		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "coopAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "CooperativeRegistered",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -276,78 +301,41 @@ export const mangueChainAbi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "ad",
+				"name": "coopAddr",
 				"type": "address"
 			}
 		],
-		"name": "getCooperative",
+		"name": "getCooperativeInfo",
 		"outputs": [
 			{
-				"internalType": "contract Cooperative",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			}
-		],
-		"name": "getTask",
-		"outputs": [
+				"internalType": "string",
+				"name": "cnpj",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cpf",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
 			{
 				"internalType": "address",
-				"name": "cooperative",
+				"name": "vault",
 				"type": "address"
 			},
 			{
-				"internalType": "string",
-				"name": "tipo",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "descr",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "area",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "georef",
-				"type": "string"
-			},
-			{
-				"internalType": "bool",
-				"name": "finished",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTaskCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -387,6 +375,45 @@ export const mangueChainAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "vault",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "name_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cnpj_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cpf_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email_",
+				"type": "string"
+			}
+		],
+		"name": "registerCooperative",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "renounceOwnership",
 		"outputs": [],
@@ -409,8 +436,8 @@ export const mangueChainAbi = [
 	{
 		"inputs": [
 			{
-				"internalType": "address payable",
-				"name": "copAddr",
+				"internalType": "address",
+				"name": "coopAddr",
 				"type": "address"
 			},
 			{
@@ -470,12 +497,18 @@ export const mangueChainAbi = [
 		"stateMutability": "payable",
 		"type": "receive"
 	}
-] as const;
+]
 
-export const crabNftAddress = "0xE0707E3b15173D053F442EC0b1C42c6Ed9538C33";
+export const crabNftAddress = "0xb64AF1c728eb44D59b3e4Dd6440819C6BFc4C2b7";
 export const crabNftAbi = [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_initialMint",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -772,9 +805,9 @@ export const crabNftAbi = [
 		"name": "initialMint",
 		"outputs": [
 			{
-				"internalType": "uint16",
+				"internalType": "uint256",
 				"name": "",
-				"type": "uint16"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -978,6 +1011,32 @@ export const crabNftAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "tokenName",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenSymbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1032,9 +1091,9 @@ export const crabNftAbi = [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-] as const;
+]
 
-export const cooperativeAddress = "0x7153AE0e99F7B550A5Ba14C3b9937Fb8382bc727";
+export const cooperativeAddress = "0x5d727Bb0800f5f08592d2dcd12D8e392D5e0664D";
 export const cooperativeAbi = [
 	{
 		"inputs": [
@@ -1042,10 +1101,49 @@ export const cooperativeAbi = [
 				"internalType": "address",
 				"name": "vault",
 				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "name_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cnpj_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cpf_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email_",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "CooperativeWithdrawal",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -1087,6 +1185,32 @@ export const cooperativeAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "getCNPJ",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getCPF",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getContractBalance",
 		"outputs": [
 			{
@@ -1096,6 +1220,71 @@ export const cooperativeAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getEmail",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getName",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getVaultAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
