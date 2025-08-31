@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 interface DonationModalProps {
   open: boolean;
@@ -8,6 +9,7 @@ interface DonationModalProps {
 
 const DonationModal: React.FC<DonationModalProps> = ({ open, onClose, children }) => {
   const [showCoin, setShowCoin] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (open) {
@@ -27,7 +29,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ open, onClose, children }
         <button
           className="absolute top-4 right-4 text-2xl text-red-500 hover:text-red-700 font-bold z-10"
           onClick={onClose}
-          aria-label="Fechar"
+          aria-label={t('close', 'Fechar')}
         >
           ×
         </button>
@@ -35,7 +37,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ open, onClose, children }
           {showCoin ? (
             <img
               src="/crabtoken.gif"
-              alt="Moeda girando"
+              alt={t('spinning_coin', 'Moeda girando')}
               className="w-32 h-32 animate-spin-slow mb-6"
               style={{ animation: 'spin 2s linear infinite' }}
             />

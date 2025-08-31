@@ -191,4 +191,34 @@ contract MangueChain is Ownable, ReentrancyGuard {
     receive() external payable {
         _retainedFees += msg.value;
     }
+
+    // Retorna o número total de tarefas criadas
+    function getTaskCount() external view returns (uint256) {
+        return _taskCounter;
+    }
+
+    // Retorna os detalhes de uma tarefa específica
+    function getTask(uint256 id) external view returns (
+        address cooperative,
+        string memory tipo,
+        string memory descr,
+        uint256 value,
+        uint256 area,
+        string memory georef,
+        bool finished
+    ) {
+        require(id > 0 && id <= _taskCounter, "Invalid task ID");
+        Task storage task = _tasks[id];
+        require(task.exists, "Task does not exist");
+
+        return (
+            address(task.cop),
+            task.tipo,
+            task.descr,
+            task.value,
+            task.area,
+            task.georef,
+            task.finished
+        );
+    }
 }

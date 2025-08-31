@@ -8,7 +8,6 @@ contract Cooperative {
     string email;
     address private _vaultAddress;
     address private _owner;
-    uint256 balance;
     event OwnerDeposit(address indexed owner, uint256 amount, string message);
 
     constructor(address vault) {

@@ -1,10 +1,11 @@
 import React from "react";
 
+// As props title e description devem ser passadas já traduzidas pelo componente pai usando i18n
 interface ImpactCardProps {
   icon: React.ReactNode;
-  title: string;
+  title: string; // traduzido
   value: string;
-  description: string;
+  description: string; // traduzido
   colorFrom: string;
   colorTo: string;
 }

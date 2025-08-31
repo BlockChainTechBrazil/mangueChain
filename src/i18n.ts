@@ -1,3 +1,4 @@
+
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
@@ -14,11 +15,12 @@ const resources = {
   es: { translation: { ...translationES, ...connectWalletES } },
 };
 
+
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt',
+    // lng removido para permitir troca dinâmica
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
   });
