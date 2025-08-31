@@ -110,11 +110,13 @@ const HomeContent: React.FC = () => {
             <h1 className="text-6xl md:text-7xl font-extrabold text-[#ef4444] mb-6 leading-tight drop-shadow-lg" style={{ textShadow: '2px 2px 8px #0008' }}>
               O que é o mangue?
             </h1>
-            <p className="text-2xl md:text-3xl text-white mb-8 w-1/2 font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
-              O mangue é um ecossistema costeiro fundamental para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
-              Ele filtra a água, abriga espécies e protege contra enchentes.<br />
-              <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span><br /><br />
-              <span className="text-white font-semibold">Curiosidades sobre o mangue:</span><br />
+            <div className="text-2xl md:text-3xl text-white mb-8 w-1/2 font-bold bg-gradient-to-r from-[#ef4444]/80 to-[#f97316]/80 p-6 rounded-2xl shadow-lg border-2 border-[#ef4444]">
+              <p>
+                O mangue é um ecossistema costeiro fundamental para a vida marinha, proteção das cidades e manutenção da biodiversidade.<br />
+                Ele filtra a água, abriga espécies e protege contra enchentes.<br />
+                <span className="text-yellow-300">É o berço da vida no litoral brasileiro!</span><br /><br />
+                <span className="text-white font-semibold">Curiosidades sobre o mangue:</span>
+              </p>
               <ul className="text-xl text-white font-medium list-disc list-inside mt-2 mb-2">
                 <li>O mangue é um dos ecossistemas mais produtivos do planeta, servindo de berçário para peixes, caranguejos e camarões.</li>
                 <li>Suas raízes filtram poluentes e ajudam a manter a qualidade da água.</li>
@@ -123,7 +125,7 @@ const HomeContent: React.FC = () => {
                 <li>O manguezal é símbolo de resistência e adaptação, sobrevivendo em áreas de água doce e salgada.</li>
               </ul>
               <span className="text-orange-200">Preservar o mangue é preservar a vida, a cultura e o futuro das cidades costeiras!</span>
-            </p>
+            </div>
           </div>
         </div>
       </section>

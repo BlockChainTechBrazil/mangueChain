@@ -7,6 +7,7 @@ import Impact from "./components/Impact";
 import Partners from "./components/Partners";
 import Home from "./pages/Home";
 import Campaigns from "./pages/Campaigns";
+import Admin from "./pages/Admin";
 
 
 const Router: React.FC = () => (
@@ -18,6 +19,7 @@ const Router: React.FC = () => (
       <Route path="/impacto" element={<Impact />} />
       <Route path="/parceiros" element={<Partners />} />
       <Route path="/campanhas" element={<Campaigns />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   </BrowserRouter>
 );
